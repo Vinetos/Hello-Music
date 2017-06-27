@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Hello Music</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Music !</string>
+    <string name="slide_1_desc">The best application for your musics !</string>
+
+    <string name="slide_2_title">Crazy Downloads</string>
+    <string name="slide_2_desc">The easiest way to download music from your favorite application such as Youtube, Deezer… !</string>
+
+    <string name="slide_3_title">Upgraded Music Player</string>
+    <string name="slide_3_desc">Listen your music with our new music player like no other one</string>
+
+    <string name="slide_4_title">Free To Use</string>
+    <string name="slide_4_desc">Totally free, easy to use… Try it now !</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+</resources>
