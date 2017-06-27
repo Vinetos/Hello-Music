@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.vinetos.hellomusic">
 
+    <!-- Download music -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
@@ -21,6 +25,18 @@
 
         <!-- Main Activity -->
         <activity android:name=".activities.MainActivity" />
+
+        <!-- Download Activity -->
+        <activity
+            android:name=".activities.WebActivity"
+            android:noHistory="true">
+            <!-- Add to the menu when an application want to share a text (url) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
