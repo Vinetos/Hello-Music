@@ -1,10 +1,27 @@
 package fr.vinetos.hellomusic.activities;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import fr.vinetos.hellomusic.R;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 /*
  * ==============================================================================
@@ -47,12 +64,130 @@ import fr.vinetos.hellomusic.R;
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+    private static final String[] PERMISSIONS_NEEDED = {
+            Manifest.permission.INTERNET,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // M and later use a new permission system
+        if (SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkAndRequestPermissions()) {
+                // App can work correctly
+                startApp();
+            }
+        } else {
+            // The new permission system isn't used
+            startApp();
+        }
+    }
+
+    private void startApp() {
+
+    }
+
+    private boolean checkAndRequestPermissions() {
+        if (SDK_INT >= Build.VERSION_CODES.M) {
+            List<String> listPermissionsNeeded = new ArrayList<>();
+
+            // Check if all permissions are granted
+            for (String perm : PERMISSIONS_NEEDED) {
+                Log.d("PERM", perm);
+                if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED)
+                    listPermissionsNeeded.add(perm);// Add to needed perms (for requests)
+            }
+
+            if (listPermissionsNeeded.isEmpty())
+                return true;
+
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+
+        }
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
+                Map<String, Integer> perms = new HashMap<>();
+                // Initialize the map with both permissions
+                for (String perm : PERMISSIONS_NEEDED) {
+                    perms.put(perm, PackageManager.PERMISSION_GRANTED);
+                }
+
+                // Fill with actual results from user
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < permissions.length; i++)
+                        perms.put(permissions[i], grantResults[i]);
+                    // Check for both permissions
+
+                    boolean arePermsGranted = true;
+                    for (String perm : PERMISSIONS_NEEDED) {
+                        if (perms.get(perm) != PackageManager.PERMISSION_GRANTED) {
+                            arePermsGranted = false;
+                        }
+                    }
+
+                    if (arePermsGranted) {
+                        // Start app
+                        startApp();
+                    } else {
+                        //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
+                        //shouldShowRequestPermissionRationale will return true
+                        //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
+                        boolean shouldRequest = false;
+                        for (String perm : PERMISSIONS_NEEDED) {
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(this, perm)) {
+                                shouldRequest = true;
+                                break;
+                            }
+                        }
+                        if (shouldRequest) {
+                            showDialogOK("We need more permissions !",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            switch (which) {
+                                                case DialogInterface.BUTTON_POSITIVE:
+                                                    checkAndRequestPermissions();
+                                                    break;
+                                                case DialogInterface.BUTTON_NEGATIVE:
+                                                    // proceed with logic by disabling the related features or quit the app.
+                                                    break;
+                                            }
+                                        }
+                                    });
+                        }
+                        //permission is denied (and never ask again is  checked)
+                        //shouldShowRequestPermissionRationale will return false
+                        else {
+                            Toast.makeText(this, "Go to settings and enable permissions", Toast.LENGTH_LONG)
+                                    .show();
+                            //proceed with logic by disabling the related features or quit the app.
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void showDialogOK(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show();
     }
 
 }
