@@ -117,8 +117,7 @@ public class WebActivity extends Activity {
                 DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
                 dm.enqueue(request);
 
-                // Try to end the activity
-                // TODO: 27/06/2017 Check is make the app crash 
+                // Close automatically the activity when download is started
                 finish();
             }
         });
