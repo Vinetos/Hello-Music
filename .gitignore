@@ -9,7 +9,6 @@
 .externalNativeBuild
 .idea/
 app/libs/
-app/src/main/res/drawable/
 target/
 pom.xml.tag
 pom.xml.releaseBackup
