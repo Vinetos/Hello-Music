@@ -66,9 +66,7 @@ public class WebActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         permissionManager = new PermissionManager(this);
-        if(permissionManager.checkAndRequestPermissions()) {
-            startApp();
-        }
+        permissionManager.checkAndRequestPermissions();
     }
 
     private void startApp() {
@@ -76,9 +74,6 @@ public class WebActivity extends Activity {
         final Intent intent = getIntent();
         final String action = intent.getAction();
         final String type = intent.getType();
-
-        permissionManager = new PermissionManager(this);
-        permissionManager.checkAndRequestPermissions();
 
         // Is open from sharing menu
         if (Intent.ACTION_SEND.equals(action) && type != null) {
@@ -139,7 +134,10 @@ public class WebActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
+            // Start the loading of the video only if we have all perms
+            startApp();
+        }
     }
 
     /**
