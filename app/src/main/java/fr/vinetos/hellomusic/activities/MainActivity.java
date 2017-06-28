@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -99,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
             // Check if all permissions are granted
             for (String perm : PERMISSIONS_NEEDED) {
-                Log.d("PERM", perm);
                 if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED)
                     listPermissionsNeeded.add(perm);// Add to needed perms (for requests)
             }
