@@ -1,14 +1,13 @@
-sudo: false
-language: android
-java: oraclejdk8
-jdk: oraclejdk8
-  android:
-    components:
-      - platform-tools
-      - tools
-      - build-tools-26.0.0
-      - android-26
-before_script:
-  - chmod +x gradlew
-script:
-  - ./gradlew check
+ language: android
+ java: oraclejdk8
+ jdk: oraclejdk8
+ android:
+   components:
+     - platform-tools
+     - tools
+     - build-tools-26.0.0
+     - android-26
+ before_script:
+   - chmod +x gradlew
+ script:
+   - ./gradlew build
