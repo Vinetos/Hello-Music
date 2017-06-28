@@ -5,12 +5,16 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 import fr.vinetos.hellomusic.R;
+import fr.vinetos.hellomusic.adapters.RecyclerViewAdapter;
+import fr.vinetos.hellomusic.listeners.CustomTouchListener;
+import fr.vinetos.hellomusic.listeners.OnItemClickListener;
+import fr.vinetos.hellomusic.manager.AudioManager;
 
 import static android.os.Build.VERSION.SDK_INT;
 
@@ -66,8 +74,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     private static final String[] PERMISSIONS_NEEDED = {
             Manifest.permission.INTERNET,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
     };
+    private static final String SERVICE_STATUS = "serviceStatus";
+    private AudioManager audioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        audioManager = new AudioManager(this);
 
         // M and later use a new permission system
         if (SDK_INT >= Build.VERSION_CODES.M) {
@@ -88,9 +100,48 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startApp() {
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (AudioManager.serviceBound) {
+            unbindService(audioManager.getServiceConnection());
+            //service is active
+            audioManager.getPlayer().stopSelf();
+        }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putBoolean(SERVICE_STATUS, AudioManager.serviceBound);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        AudioManager.serviceBound = savedInstanceState.getBoolean(SERVICE_STATUS);
+    }
+
+    private void startApp() {
+        audioManager.loadAudio();
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        if (AudioManager.musicsList != null && AudioManager.musicsList.size() > 0) {
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(AudioManager.musicsList, getApplication());
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.addOnItemTouchListener(new CustomTouchListener(this, new OnItemClickListener() {
+                @Override
+                public void onClick(View view, int index) {
+                    audioManager.playAudio(index);
+                }
+            }));
+        }
+    }
+
 
     private boolean checkAndRequestPermissions() {
         if (SDK_INT >= Build.VERSION_CODES.M) {

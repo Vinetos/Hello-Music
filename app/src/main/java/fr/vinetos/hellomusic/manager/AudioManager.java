@@ -1,15 +1,19 @@
 package fr.vinetos.hellomusic.manager;
 
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.IBinder;
 import android.provider.MediaStore;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.vinetos.hellomusic.adapters.AudioAdapter;
+import fr.vinetos.hellomusic.services.AudioService;
 
 /*
  * ==============================================================================
@@ -53,14 +57,36 @@ import fr.vinetos.hellomusic.adapters.AudioAdapter;
 public class AudioManager {
 
     public static final String BROADCAST_PLAY_NEW_AUDIO = PreferencesManager.PREF_NAME + ".PlayNewAudio";
+    public static ArrayList<AudioAdapter> musicsList = new ArrayList<>();
+    public static boolean serviceBound;
     private Context context;
-    private List<AudioAdapter> musicsList = new ArrayList<>();
+    private AudioService player;
+    //Binding this Client to the AudioPlayer Service
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            AudioService.LocalBinder binder = (AudioService.LocalBinder) service;
+            player = binder.getService();
+            AudioManager.serviceBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            AudioManager.serviceBound = false;
+        }
+    };
 
     public AudioManager(Context context) {
         this.context = context;
     }
 
-    private void loadAudio() {
+    public static boolean isServiceBound() {
+        return serviceBound;
+    }
+
+    public void loadAudio() {
+        if (!musicsList.isEmpty()) return;
         // Search audio into the device
         ContentResolver contentResolver = context.getContentResolver();
 
@@ -81,6 +107,37 @@ public class AudioManager {
             }
         }
         cursor.close();
+    }
+
+    public void playAudio(int audioIndex) {
+        //Check is service is active
+        if (!serviceBound) {
+            //Store Serializable audioList to SharedPreferences
+            PreferencesManager storage = new PreferencesManager(context);
+            storage.storeAudio(musicsList);
+            storage.storeAudioIndex(audioIndex);
+
+            Intent playerIntent = new Intent(context, AudioService.class);
+            context.startService(playerIntent);
+            context.bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+        } else {
+            //Store the new audioIndex to SharedPreferences
+            PreferencesManager storage = new PreferencesManager(context);
+            storage.storeAudioIndex(audioIndex);
+
+            //Service is active
+            //Send a broadcast to the service -> PLAY_NEW_AUDIO
+            Intent broadcastIntent = new Intent(BROADCAST_PLAY_NEW_AUDIO);
+            context.sendBroadcast(broadcastIntent);
+        }
+    }
+
+    public ServiceConnection getServiceConnection() {
+        return serviceConnection;
+    }
+
+    public AudioService getPlayer() {
+        return player;
     }
 
     public enum AudioStatus {

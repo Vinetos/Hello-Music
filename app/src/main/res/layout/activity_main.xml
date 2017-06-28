@@ -31,23 +31,7 @@
 
     </LinearLayout>
 
-    <fr.vinetos.hellomusic.widgets.CircularSeekBar
-        android:id="@+id/song_progress_circular"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:maxHeight="1dp"
-        android:progress="30"
-        app:circle_color="#33000000"
-        app:circle_progress_color="#2278d4"
-        app:circle_stroke_width="2"
-        app:pointer_color="#2278d4"
-        app:pointer_halo_border_width="1.5"
-        app:pointer_halo_color="#2278d4"
-        app:pointer_halo_width="0.5" />
+    <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>
 
