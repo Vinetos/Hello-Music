@@ -10,7 +10,6 @@
 .idea/
 app/libs/
 app/src/main/res/drawable/
-gradle/
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -42,10 +41,8 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-.gradle
 /build/
 gradle-app.setting
-!gradle-wrapper.jar
 .gradletasknamecache
 *.apk
 *.ap_
@@ -84,3 +81,4 @@ freeline_project_description.json
 *.tar.gz
 *.rar
 hs_err_pid*
+!gradle-wrapper.jar
