@@ -1,3 +1,4 @@
+ sudo: false
  language: android
  java: oraclejdk8
  jdk: oraclejdk8
@@ -7,11 +8,20 @@
      - tools
      - build-tools-26.0.0
      - android-26
-     - extra-google-google_play_services
-     - extra-google-m2repository
-     - extra-android-m2repository
-     - addon-google_apis-google-19
- before_script:
-   - chmod +x gradlew
- script:
-   - ./gradlew build
+before_script:
+  - chmod +x gradlew
+script:
+  - "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
+
+notifications:
+  email: true
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - "$HOME/.m2"
+    - "$HOME/.gradle"
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+    - "$HOME/.android/build-cache"
