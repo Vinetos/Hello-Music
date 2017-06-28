@@ -66,7 +66,9 @@ public class WebActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         permissionManager = new PermissionManager(this);
-        permissionManager.checkAndRequestPermissions();
+        if (permissionManager.checkAndRequestPermissions()) {
+            startApp();
+        }
     }
 
     private void startApp() {
