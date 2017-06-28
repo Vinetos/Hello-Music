@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.vinetos.hellomusic">
+    package="fr.vinetos.hellomusic"
+    android:installLocation="preferExternal">
 
     <!-- Download music -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
