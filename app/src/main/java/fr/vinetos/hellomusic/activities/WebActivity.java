@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.webkit.DownloadListener;
 import android.webkit.URLUtil;
 import android.webkit.WebSettings;
@@ -13,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import fr.vinetos.hellomusic.R;
+import fr.vinetos.hellomusic.manager.PermissionManager;
 
 /*
  * ==============================================================================
@@ -57,10 +59,19 @@ public class WebActivity extends Activity {
 
     public static final String HOME = "http://m.vinetos.fr";
     public static final String YOUTUBE_API_HOME = HOME + "/youtube/?url=";
+    private PermissionManager permissionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        permissionManager = new PermissionManager(this);
+        if(permissionManager.checkAndRequestPermissions()) {
+            startApp();
+        }
+    }
+
+    private void startApp() {
         // Get intent, action and MIME type
         final Intent intent = getIntent();
         final String action = intent.getAction();
@@ -102,7 +113,7 @@ public class WebActivity extends Activity {
                 return true;
             }
         });
-        // Support downloads with the Downloadanager
+        // Support downloads with the DownloadManager
         webView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent,
@@ -121,6 +132,14 @@ public class WebActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        if (permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
+            // Start the loading of the video only if we have all perms
+            startApp();
+        }
     }
 
     /**
