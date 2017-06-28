@@ -10,6 +10,7 @@
      - extra-google-m2repository
      - extra-android-m2repository
      - addon-google_apis-google-19
-
+ before_script:
+   - chmod +x gradlew
  script:
    - ./gradlew build
