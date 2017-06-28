@@ -1,13 +1,13 @@
 package fr.vinetos.hellomusic.manager;
 
+import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.vinetos.hellomusic.adapters.AudioAdapter;
 
@@ -50,60 +50,42 @@ import fr.vinetos.hellomusic.adapters.AudioAdapter;
  *
  *==============================================================================
  */
-public class PreferencesManager {
+public class AudioManager {
 
-    // Shared preferences file name
-    public static final String PREF_NAME = "fr.vinetos.hellomusic.HelloMusic";
-    private static final String AUDIO_CACHE_STORAGE = " AudioCacheStorage";
-    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
-    // shared pref mode
-    private static final int PRIVATE_MODE = 0;
+    public static final String BROADCAST_PLAY_NEW_AUDIO = PreferencesManager.PREF_NAME + ".PlayNewAudio";
+    private Context context;
+    private List<AudioAdapter> musicsList = new ArrayList<>();
 
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
-
-    public PreferencesManager(Context context) {
-        preferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
-        editor = preferences.edit();
+    public AudioManager(Context context) {
+        this.context = context;
     }
 
-    public boolean isFirstTimeLaunch() {
-        return preferences.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    private void loadAudio() {
+        // Search audio into the device
+        ContentResolver contentResolver = context.getContentResolver();
+
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String selection = MediaStore.Audio.Media.IS_MUSIC + "!= 0";
+        String sortOrder = MediaStore.Audio.Media.TITLE + " ASC";
+
+        Cursor cursor = contentResolver.query(uri, null, selection, null, sortOrder);
+        if (cursor != null && cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+                String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
+                String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
+                String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+
+                // musicsList to audioList
+                musicsList.add(new AudioAdapter(data, title, album, artist));
+            }
+        }
+        cursor.close();
     }
 
-    public void setFirstTimeLaunch(boolean isFirstTime) {
-        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
-        editor.commit();
+    public enum AudioStatus {
+        PLAYING,
+        PAUSED
     }
-
-    public void storeAudio(ArrayList<AudioAdapter> arrayList) {
-        Gson gson = new Gson();
-        String json = gson.toJson(arrayList);
-        editor.putString(AUDIO_CACHE_STORAGE, json);
-        editor.apply();
-    }
-
-    public ArrayList<AudioAdapter> loadAudio() {
-        Gson gson = new Gson();
-        String json = preferences.getString(AUDIO_CACHE_STORAGE, null);
-        Type type = new TypeToken<ArrayList<AudioAdapter>>() {
-        }.getType();
-        return gson.fromJson(json, type);
-    }
-
-    public void storeAudioIndex(int index) {
-        editor.putInt(AUDIO_CACHE_STORAGE, index);
-        editor.apply();
-    }
-
-    public int loadAudioIndex() {
-        return preferences.getInt(AUDIO_CACHE_STORAGE, -1);//return -1 if no data found
-    }
-
-    public void clearCachedAudioPlaylist() {
-        editor.clear();
-        editor.commit();
-    }
-
 
 }
