@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import fr.vinetos.hellomusic.R;
+import fr.vinetos.hellomusic.manager.PermissionManager;
 import fr.vinetos.hellomusic.manager.PreferencesManager;
 
 /*
@@ -99,11 +101,11 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     };
     private PreferencesManager prefManager;
+    private PermissionManager permissionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Checking for first time launch - before calling setContentView()
         prefManager = new PreferencesManager(this);
         if (!prefManager.isFirstTimeLaunch()) {
@@ -117,6 +119,9 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_welcome);
+
+        permissionManager = new PermissionManager(this);
+        permissionManager.checkAndRequestPermissions();
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
@@ -203,6 +208,11 @@ public class WelcomeActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /**
