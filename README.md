@@ -1,5 +1,7 @@
 # Hello-Music [![Build Status](https://travis-ci.org/Vinetos/Hello-Music-droid.svg?branch=master)](https://travis-ci.org/Vinetos/Hello-Music)
-Listen and download musics in Android 4.0+
+Listen and download musics in Android 4.0+ 
+
+Download from the [Release section](https://github.com/Vinetos/Hello-Music-droid/releases).
 
 ## Downloader
 Download from Youtube app with the share menu.
