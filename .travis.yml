@@ -32,5 +32,6 @@ deploy:
   on:
     branch: master
     repo: Vinetos/Hello-Music-droid
+  skip_cleanup: true
 after_success:
   - sh set_tags.sh
