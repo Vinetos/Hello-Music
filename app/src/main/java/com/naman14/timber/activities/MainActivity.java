@@ -211,6 +211,7 @@ public class MainActivity extends BaseActivity implements ATEActivityThemeCustom
     }
 
     private void checkPermissionAndThenLoad() {
+        Nammu.init(this);
         //check for permission
         if (Nammu.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
             loadEverything();
