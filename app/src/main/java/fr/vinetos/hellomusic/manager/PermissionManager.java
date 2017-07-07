@@ -60,7 +60,10 @@ public class PermissionManager {
     private static final String[] PERMISSIONS_NEEDED = {
             Manifest.permission.INTERNET,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WAKE_LOCK,
+            Manifest.permission.BROADCAST_STICKY,
+            Manifest.permission.ACCESS_NETWORK_STATE
     };
     private Activity activity;
 
