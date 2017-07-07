@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.naman14.timber.activities.MainActivity;
+
 import fr.vinetos.hellomusic.R;
 import fr.vinetos.hellomusic.manager.PermissionManager;
 import fr.vinetos.hellomusic.manager.PreferencesManager;

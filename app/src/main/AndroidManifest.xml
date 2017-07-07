@@ -1,11 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.vinetos.hellomusic"
     android:installLocation="preferExternal">
+
+    <!-- SDK Override -->
+    <uses-sdk tools:overrideLibrary="de.Maxr1998.trackselectorlib" />
 
     <!-- Download music -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- Listener music -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
 
     <application
         android:allowBackup="true"
@@ -13,20 +22,17 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo_square"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.FullScreen.Light">
 
         <!-- Activities -->
         <!-- Welcome Activity -->
         <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Main Activity -->
-        <activity android:name=".activities.MainActivity" />
 
         <!-- Download Activity -->
         <activity
@@ -39,6 +45,85 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.naman14.timber.activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.CATEGORY_APP_MUSIC" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="file" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+            <intent-filter android:priority="-1">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.naman14.timber.activities.SettingsActivity"
+            android:theme="@style/AppThemeNormalLight" />
+
+        <activity
+            android:name="com.naman14.timber.activities.PlaylistDetailActivity"
+            android:theme="@style/AppTheme.FullScreen.Light" />
+
+        <activity
+            android:name="com.naman14.timber.activities.SearchActivity"
+            android:theme="@style/AppThemeNormalLight" />
+
+        <activity
+            android:name="com.naman14.timber.activities.NowPlayingActivity"
+            android:theme="@style/AppTheme.FullScreen.Light" />
+
+        <receiver android:name="com.naman14.timber.helpers.MediaButtonIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            </intent-filter>
+        </receiver>
+        <!-- Music service -->
+        <service
+            android:name="com.naman14.timber.MusicService"
+            android:label="@string/app_name"
+            android:process=":main" />
+
+        <service
+            android:name="com.naman14.timber.WearBrowserService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
