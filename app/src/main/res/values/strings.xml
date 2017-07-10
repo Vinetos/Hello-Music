@@ -98,7 +98,7 @@
     <string name="personalisation">Personalisation</string>
     <string name="other">Other</string>
     <string name="advanced">Advanced</string>
-    <string name="timber_about_opensource">SoungsPro is a open source Music Player developed by Spandan Joshi.</string>
+    <string name="timber_about_opensource">HelloMusic is a open source app to download ans listener Musics by Vinetos. We use SoungsPro a open source Music Player developed by Spandan Joshi.</string>
     <string name="summary_pause_detach">Toggle for pausing playback when headphone is detached</string>
     <string name="pause_detach">Pause on Detach</string>
     <string name="summary_xposed_trackselector">Requires Xposed and XMediaNotificationTrackSelector Xposed module to be installed. This will provide access to playing queue from the notification bar itself.</string>
