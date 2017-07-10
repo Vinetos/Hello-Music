@@ -55,7 +55,7 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.fragment_main, container, false);
 
-        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -63,13 +63,13 @@ public class MainFragment extends Fragment {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
-        viewPager = rootView.findViewById(R.id.viewpager);
+        viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         if (viewPager != null) {
             setupViewPager(viewPager);
             viewPager.setOffscreenPageLimit(2);
         }
 
-        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         return rootView;

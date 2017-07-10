@@ -92,7 +92,7 @@ public class Timber4QueueAdapter extends RecyclerView.Adapter<Timber4QueueAdapte
 
         public ItemHolder(View view) {
             super(view);
-            this.albumArt = view.findViewById(R.id.album_art);
+            this.albumArt = (ImageView) view.findViewById(R.id.album_art);
             view.setOnClickListener(this);
         }
 

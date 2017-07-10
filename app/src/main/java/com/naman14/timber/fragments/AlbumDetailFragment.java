@@ -119,21 +119,21 @@ public class AlbumDetailFragment extends Fragment {
         final View rootView = inflater.inflate(
                 R.layout.fragment_album_detail, container, false);
 
-        albumArt = rootView.findViewById(R.id.album_art);
-        artistArt = rootView.findViewById(R.id.artist_art);
-        albumTitle = rootView.findViewById(R.id.album_title);
-        albumDetails = rootView.findViewById(R.id.album_details);
+        albumArt = (ImageView) rootView.findViewById(R.id.album_art);
+        artistArt = (ImageView) rootView.findViewById(R.id.artist_art);
+        albumTitle = (TextView) rootView.findViewById(R.id.album_title);
+        albumDetails = (TextView) rootView.findViewById(R.id.album_details);
 
-        toolbar = rootView.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
 
-        fab = rootView.findViewById(R.id.fab);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
 
         if (getArguments().getBoolean("transition")) {
             albumArt.setTransitionName(getArguments().getString("transition_name"));
         }
-        recyclerView = rootView.findViewById(R.id.recyclerview);
-        collapsingToolbarLayout = rootView.findViewById(R.id.collapsing_toolbar);
-        appBarLayout = rootView.findViewById(R.id.app_bar);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
+        appBarLayout = (AppBarLayout) rootView.findViewById(R.id.app_bar);
         recyclerView.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

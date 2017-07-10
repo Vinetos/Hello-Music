@@ -162,9 +162,9 @@ public class MainActivity extends BaseActivity implements ATEActivityThemeCustom
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         View header = navigationView.inflateHeaderView(R.layout.nav_header);
 
-        albumart = header.findViewById(R.id.album_art);
-        songtitle = header.findViewById(R.id.song_title);
-        songartist = header.findViewById(R.id.song_artist);
+        albumart = (ImageView) header.findViewById(R.id.album_art);
+        songtitle = (TextView) header.findViewById(R.id.song_title);
+        songartist = (TextView) header.findViewById(R.id.song_artist);
 
         setPanelSlideListeners(panelLayout);
 

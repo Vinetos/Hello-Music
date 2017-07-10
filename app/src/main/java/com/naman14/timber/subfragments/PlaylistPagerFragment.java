@@ -78,11 +78,11 @@ public class PlaylistPagerFragment extends Fragment {
         pageNumber = getArguments().getInt(ARG_PAGE_NUMBER);
         playlist = playlists.get(pageNumber);
 
-        playlistame = rootView.findViewById(R.id.name);
-        playlistnumber = rootView.findViewById(R.id.number);
-        songcount = rootView.findViewById(R.id.songcount);
-        playlisttype = rootView.findViewById(R.id.playlisttype);
-        playlistImage = rootView.findViewById(R.id.playlist_image);
+        playlistame = (TextView) rootView.findViewById(R.id.name);
+        playlistnumber = (TextView) rootView.findViewById(R.id.number);
+        songcount = (TextView) rootView.findViewById(R.id.songcount);
+        playlisttype = (TextView) rootView.findViewById(R.id.playlisttype);
+        playlistImage = (ImageView) rootView.findViewById(R.id.playlist_image);
         foreground = rootView.findViewById(R.id.foreground);
 
         playlistImage.setOnClickListener(new View.OnClickListener() {

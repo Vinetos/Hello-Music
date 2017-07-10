@@ -100,7 +100,7 @@ public class WebActivity extends Activity {
      * @param url URL to open
      */
     private void openWebPage(String url) {
-        WebView webView = findViewById(R.id.webview);
+        WebView webView = (WebView) findViewById(R.id.webview);
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);

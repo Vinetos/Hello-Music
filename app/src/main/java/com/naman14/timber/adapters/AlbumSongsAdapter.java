@@ -145,10 +145,10 @@ public class AlbumSongsAdapter extends RecyclerView.Adapter<AlbumSongsAdapter.It
 
         public ItemHolder(View view) {
             super(view);
-            this.title = view.findViewById(R.id.song_title);
-            this.duration = view.findViewById(R.id.song_duration);
-            this.trackNumber = view.findViewById(R.id.trackNumber);
-            this.menu = view.findViewById(R.id.popup_menu);
+            this.title = (TextView) view.findViewById(R.id.song_title);
+            this.duration = (TextView) view.findViewById(R.id.song_duration);
+            this.trackNumber = (TextView) view.findViewById(R.id.trackNumber);
+            this.menu = (ImageView) view.findViewById(R.id.popup_menu);
             view.setOnClickListener(this);
         }
 

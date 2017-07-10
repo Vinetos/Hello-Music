@@ -95,8 +95,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.title);
-            play_pause = itemView.findViewById(R.id.play_pause);
+            title = (TextView) itemView.findViewById(R.id.title);
+            play_pause = (ImageView) itemView.findViewById(R.id.play_pause);
             state = false;
         }
 

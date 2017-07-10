@@ -85,16 +85,16 @@ public class ArtistDetailFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.fragment_artist_detail, container, false);
 
-        artistArt = rootView.findViewById(R.id.artist_art);
+        artistArt = (ImageView) rootView.findViewById(R.id.artist_art);
 
-        collapsingToolbarLayout = rootView.findViewById(R.id.collapsing_toolbar);
-        appBarLayout = rootView.findViewById(R.id.app_bar);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
+        appBarLayout = (AppBarLayout) rootView.findViewById(R.id.app_bar);
 
         if (getArguments().getBoolean("transition")) {
             artistArt.setTransitionName(getArguments().getString("transition_name"));
         }
 
-        toolbar = rootView.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         setupToolbar();
         setUpArtistDetails();
 

@@ -55,10 +55,10 @@ public class SubStyleSelectorFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_style_selector_pager, container, false);
 
-        TextView styleName = rootView.findViewById(R.id.style_name);
+        TextView styleName = (TextView) rootView.findViewById(R.id.style_name);
         styleName.setText(String.valueOf(getArguments().getInt(ARG_PAGE_NUMBER) + 1));
 
-        styleImage = rootView.findViewById(R.id.style_image);
+        styleImage = (ImageView) rootView.findViewById(R.id.style_image);
         styleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +81,7 @@ public class SubStyleSelectorFragment extends Fragment {
                 break;
         }
 
-        currentStyle = rootView.findViewById(R.id.currentStyle);
+        currentStyle = (LinearLayout) rootView.findViewById(R.id.currentStyle);
         foreground = rootView.findViewById(R.id.foreground);
 
         setCurrentStyle();

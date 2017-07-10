@@ -43,7 +43,7 @@ public class Timber2 extends BaseNowplayingFragment {
 
         setMusicStateListener();
         setSongDetails(rootView);
-        mBlurredArt = rootView.findViewById(R.id.album_art_blurred);
+        mBlurredArt = (ImageView) rootView.findViewById(R.id.album_art_blurred);
 
         return rootView;
     }

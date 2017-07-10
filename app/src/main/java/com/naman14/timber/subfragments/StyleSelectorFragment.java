@@ -59,7 +59,7 @@ public class StyleSelectorFragment extends Fragment {
         if (ACTION.equals(Constants.SETTINGS_STYLE_SELECTOR_NOWPLAYING)) {
 
         }
-        pager = rootView.findViewById(R.id.pager);
+        pager = (MultiViewPager) rootView.findViewById(R.id.pager);
 
         adapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
 

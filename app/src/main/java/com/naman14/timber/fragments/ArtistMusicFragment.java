@@ -59,7 +59,7 @@ public class ArtistMusicFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.fragment_artist_music, container, false);
 
-        songsRecyclerview = rootView.findViewById(R.id.recycler_view_songs);
+        songsRecyclerview = (RecyclerView) rootView.findViewById(R.id.recycler_view_songs);
 
         setUpSongs();
 

@@ -51,7 +51,7 @@ public class PlaylistFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.fragment_playlist, container, false);
 
-        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -62,7 +62,7 @@ public class PlaylistFragment extends Fragment {
         final List<Playlist> playlists = PlaylistLoader.getPlaylists(getActivity(), true);
         playlistcount = playlists.size();
 
-        pager = rootView.findViewById(R.id.playlistpager);
+        pager = (MultiViewPager) rootView.findViewById(R.id.playlistpager);
 
         adapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
 

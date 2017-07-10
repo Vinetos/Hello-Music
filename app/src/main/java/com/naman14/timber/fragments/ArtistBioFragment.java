@@ -71,7 +71,7 @@ public class ArtistBioFragment extends Fragment {
             }
         });
 
-        final MultiViewPager pager = rootView.findViewById(R.id.tagspager);
+        final MultiViewPager pager = (MultiViewPager) rootView.findViewById(R.id.tagspager);
 
         final FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getActivity().getSupportFragmentManager()) {
 

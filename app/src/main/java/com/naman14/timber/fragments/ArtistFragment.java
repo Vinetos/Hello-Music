@@ -61,8 +61,8 @@ public class ArtistFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.fragment_recyclerview, container, false);
 
-        recyclerView = rootView.findViewById(R.id.recyclerview);
-        fastScroller = rootView.findViewById(R.id.fastscroller);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        fastScroller = (FastScroller) rootView.findViewById(R.id.fastscroller);
 
         setLayoutManager();
 

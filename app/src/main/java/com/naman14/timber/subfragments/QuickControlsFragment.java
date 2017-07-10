@@ -126,22 +126,22 @@ public class QuickControlsFragment extends Fragment implements MusicStateListene
         View rootView = inflater.inflate(R.layout.fragment_playback_controls, container, false);
         this.rootView = rootView;
 
-        mPlayPause = rootView.findViewById(R.id.play_pause);
-        mPlayPauseExpanded = rootView.findViewById(R.id.playpause);
+        mPlayPause = (PlayPauseButton) rootView.findViewById(R.id.play_pause);
+        mPlayPauseExpanded = (PlayPauseButton) rootView.findViewById(R.id.playpause);
         playPauseWrapper = rootView.findViewById(R.id.play_pause_wrapper);
         playPauseWrapperExpanded = rootView.findViewById(R.id.playpausewrapper);
         playPauseWrapper.setOnClickListener(mPlayPauseListener);
         playPauseWrapperExpanded.setOnClickListener(mPlayPauseExpandedListener);
-        mProgress = rootView.findViewById(R.id.song_progress_normal);
-        mSeekBar = rootView.findViewById(R.id.song_progress);
-        mTitle = rootView.findViewById(R.id.title);
-        mArtist = rootView.findViewById(R.id.artist);
-        mTitleExpanded = rootView.findViewById(R.id.song_title);
-        mArtistExpanded = rootView.findViewById(R.id.song_artist);
-        mAlbumArt = rootView.findViewById(R.id.album_art_nowplayingcard);
-        mBlurredArt = rootView.findViewById(R.id.blurredAlbumart);
-        next = rootView.findViewById(R.id.next);
-        previous = rootView.findViewById(R.id.previous);
+        mProgress = (ProgressBar) rootView.findViewById(R.id.song_progress_normal);
+        mSeekBar = (SeekBar) rootView.findViewById(R.id.song_progress);
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+        mArtist = (TextView) rootView.findViewById(R.id.artist);
+        mTitleExpanded = (TextView) rootView.findViewById(R.id.song_title);
+        mArtistExpanded = (TextView) rootView.findViewById(R.id.song_artist);
+        mAlbumArt = (ImageView) rootView.findViewById(R.id.album_art_nowplayingcard);
+        mBlurredArt = (ImageView) rootView.findViewById(R.id.blurredAlbumart);
+        next = (MaterialIconView) rootView.findViewById(R.id.next);
+        previous = (MaterialIconView) rootView.findViewById(R.id.previous);
         topContainer = rootView.findViewById(R.id.topContainer);
 
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mProgress.getLayoutParams();

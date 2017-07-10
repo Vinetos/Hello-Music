@@ -49,7 +49,7 @@ public class QueueFragment extends Fragment implements MusicStateListener {
         View rootView = inflater.inflate(
                 R.layout.fragment_queue, container, false);
 
-        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -57,7 +57,7 @@ public class QueueFragment extends Fragment implements MusicStateListener {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(R.string.playing_queue);
 
-        recyclerView = rootView.findViewById(R.id.recyclerview);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(null);
 

@@ -149,12 +149,12 @@ public class PlayingQueueAdapter extends RecyclerView.Adapter<PlayingQueueAdapte
 
         public ItemHolder(View view) {
             super(view);
-            this.title = view.findViewById(R.id.song_title);
-            this.artist = view.findViewById(R.id.song_artist);
-            this.albumArt = view.findViewById(R.id.albumArt);
-            this.menu = view.findViewById(R.id.popup_menu);
-            this.reorder = view.findViewById(R.id.reorder);
-            visualizer = view.findViewById(R.id.visualizer);
+            this.title = (TextView) view.findViewById(R.id.song_title);
+            this.artist = (TextView) view.findViewById(R.id.song_artist);
+            this.albumArt = (ImageView) view.findViewById(R.id.albumArt);
+            this.menu = (ImageView) view.findViewById(R.id.popup_menu);
+            this.reorder = (ImageView) view.findViewById(R.id.reorder);
+            visualizer = (MusicVisualizer) view.findViewById(R.id.visualizer);
             view.setOnClickListener(this);
         }
 

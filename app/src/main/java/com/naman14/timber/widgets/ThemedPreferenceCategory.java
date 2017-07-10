@@ -35,7 +35,7 @@ public class ThemedPreferenceCategory extends PreferenceCategory {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-        TextView titleView = view.findViewById(android.R.id.title);
+        TextView titleView = (TextView) view.findViewById(android.R.id.title);
         titleView.setTextColor(Config.accentColor(context, Helpers.getATEKey(context)));
     }
 }

@@ -200,11 +200,11 @@ public class SongsListAdapter extends RecyclerView.Adapter<SongsListAdapter.Item
 
         public ItemHolder(View view) {
             super(view);
-            this.title = view.findViewById(R.id.song_title);
-            this.artist = view.findViewById(R.id.song_artist);
-            this.albumArt = view.findViewById(R.id.albumArt);
-            this.popupMenu = view.findViewById(R.id.popup_menu);
-            visualizer = view.findViewById(R.id.visualizer);
+            this.title = (TextView) view.findViewById(R.id.song_title);
+            this.artist = (TextView) view.findViewById(R.id.song_artist);
+            this.albumArt = (ImageView) view.findViewById(R.id.albumArt);
+            this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
+            visualizer = (MusicVisualizer) view.findViewById(R.id.visualizer);
             view.setOnClickListener(this);
         }
 

@@ -210,34 +210,34 @@ public class BaseNowplayingFragment extends Fragment implements MusicStateListen
 
     public void setSongDetails(View view) {
 
-        albumart = view.findViewById(R.id.album_art);
-        shuffle = view.findViewById(R.id.shuffle);
-        repeat = view.findViewById(R.id.repeat);
-        next = view.findViewById(R.id.next);
-        previous = view.findViewById(R.id.previous);
-        mPlayPause = view.findViewById(R.id.playpause);
-        playPauseFloating = view.findViewById(R.id.playpausefloating);
+        albumart = (ImageView) view.findViewById(R.id.album_art);
+        shuffle = (ImageView) view.findViewById(R.id.shuffle);
+        repeat = (ImageView) view.findViewById(R.id.repeat);
+        next = (MaterialIconView) view.findViewById(R.id.next);
+        previous = (MaterialIconView) view.findViewById(R.id.previous);
+        mPlayPause = (PlayPauseButton) view.findViewById(R.id.playpause);
+        playPauseFloating = (FloatingActionButton) view.findViewById(R.id.playpausefloating);
         playPauseWrapper = view.findViewById(R.id.playpausewrapper);
 
-        songtitle = view.findViewById(R.id.song_title);
-        songalbum = view.findViewById(R.id.song_album);
-        songartist = view.findViewById(R.id.song_artist);
-        songduration = view.findViewById(R.id.song_duration);
-        elapsedtime = view.findViewById(R.id.song_elapsed_time);
+        songtitle = (TextView) view.findViewById(R.id.song_title);
+        songalbum = (TextView) view.findViewById(R.id.song_album);
+        songartist = (TextView) view.findViewById(R.id.song_artist);
+        songduration = (TextView) view.findViewById(R.id.song_duration);
+        elapsedtime = (TextView) view.findViewById(R.id.song_elapsed_time);
 
-        timelyView11 = view.findViewById(R.id.timelyView11);
-        timelyView12 = view.findViewById(R.id.timelyView12);
-        timelyView13 = view.findViewById(R.id.timelyView13);
-        timelyView14 = view.findViewById(R.id.timelyView14);
-        timelyView15 = view.findViewById(R.id.timelyView15);
-        hourColon = view.findViewById(R.id.hour_colon);
+        timelyView11 = (TimelyView) view.findViewById(R.id.timelyView11);
+        timelyView12 = (TimelyView) view.findViewById(R.id.timelyView12);
+        timelyView13 = (TimelyView) view.findViewById(R.id.timelyView13);
+        timelyView14 = (TimelyView) view.findViewById(R.id.timelyView14);
+        timelyView15 = (TimelyView) view.findViewById(R.id.timelyView15);
+        hourColon = (TextView) view.findViewById(R.id.hour_colon);
 
-        mProgress = view.findViewById(R.id.song_progress);
-        mCircularProgress = view.findViewById(R.id.song_progress_circular);
+        mProgress = (SeekBar) view.findViewById(R.id.song_progress);
+        mCircularProgress = (CircularSeekBar) view.findViewById(R.id.song_progress_circular);
 
-        recyclerView = view.findViewById(R.id.queue_recyclerview);
+        recyclerView = (RecyclerView) view.findViewById(R.id.queue_recyclerview);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         if (toolbar != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
             final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
