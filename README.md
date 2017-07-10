@@ -4,8 +4,8 @@ See the wiki: [here](https://github.com/Vinetos/Hello-Music)
 
 Download from the [Release section](https://github.com/Vinetos/Hello-Music-droid/releases).
 
-## Downloader [![Build Status](https://travis-ci.org/Vinetos/Hello-Music-droid.svg?branch=master)](https://travis-ci.org/Vinetos/Hello-Music-droid)
+## Downloader 
 Download from Youtube app with the share menu.
 
-## AudioPlayer (under development): [![Build Status](https://travis-ci.org/Vinetos/Hello-Music-droid.svg?branch=feat_audioplayer)](https://travis-ci.org/Vinetos/Hello-Music-droid)
-List, display and open music from the app (in-dev)
+## AudioPlayer (under development): 
+List, display and open music from the app ! 
