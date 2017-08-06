@@ -8,8 +8,8 @@ android {
         minSdkVersion 14
         // Fix some runtime error by using api 25
         targetSdkVersion 25
-        versionCode 9
-        versionName "9.0"
+        versionCode 10
+        versionName "1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //renderscript support mode is not supported for 21+ with gradle version 2.0

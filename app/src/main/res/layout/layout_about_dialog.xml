@@ -82,18 +82,6 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/feature_request"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
-        android:paddingLeft="15dp"
-        android:text="@string/timber_feature_request"
-        android:textSize="16sp" />
-
-    <TextView
         android:id="@+id/dismiss_dialog"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"

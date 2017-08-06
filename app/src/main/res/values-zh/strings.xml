@@ -36,7 +36,6 @@
     <string name="playlist_top_tracks">我的最佳单曲</string>
 
     <string name="timber_source">报告任何 bug，在<u> 这里 </u>。</string>
-    <string name="timber_feature_request">提出任何特性请求通过 Google+ 社区，在 <u> 这里 </u>。</string>
 
     <string name="menu_show_as">视图</string>
     <string name="menu_show_as_entry_list">列表</string>
@@ -76,7 +75,7 @@
     <string name="now_playing_selector">选择正在播放画面，从4个不同风格中。</string>
     <string name="personalisation">个性化</string>
     <string name="other">其他</string>
-    <string name="timber_about_opensource">Timber 是一个开源音乐播放器，由 Naman Dwivedi 开发。</string>
+    <string name="timber_about_opensource">Timber 是一个开源音乐播放器，由 Naman Dwivedi, Vinetos 开发。</string>
     <string name="summary_pause_detach">切换为暂停播放，当耳机被拔出时。</string>
     <string name="pause_detach">拔出暂停</string>
     <string name="currently_selected">当前选择</string>

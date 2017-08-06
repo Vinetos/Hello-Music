@@ -57,11 +57,9 @@ public class Helpers {
 
     public static class AboutDialog extends DialogFragment {
 
-        String urlgooglelus = "https://plus.google.com/+SpandanJoshihackerdude";
-        String urlcommunity = "https://plus.google.com/+SpandanJoshihackerdude";
-        String urltwitter = "https://twitter.com/Spandan_Joshi";
-        String urlgithub = "https://github.com/spandanjoshi";
-        String urlsource = "https://github.com/spandanjoshi";
+        String urltwitter = "https://twitter.com/Vinetos";
+        String urlgithub = "https://github.com/Vinetos/Hello-Music-droid/";
+        String urlsource = "https://github.com/Vinetos/Hello-Music-droid/issues";
 
         public AboutDialog() {
         }
@@ -75,11 +73,9 @@ public class Helpers {
 
             TextView appversion = (TextView) aboutBodyView.findViewById(R.id.app_version_name);
 
-            TextView googleplus = (TextView) aboutBodyView.findViewById(R.id.googleplus);
             TextView twitter = (TextView) aboutBodyView.findViewById(R.id.twitter);
             TextView github = (TextView) aboutBodyView.findViewById(R.id.github);
             TextView source = (TextView) aboutBodyView.findViewById(R.id.source);
-            TextView community = (TextView) aboutBodyView.findViewById(R.id.feature_request);
 
             TextView dismiss = (TextView) aboutBodyView.findViewById(R.id.dismiss_dialog);
             dismiss.setOnClickListener(new View.OnClickListener() {
@@ -88,19 +84,9 @@ public class Helpers {
                     dismiss();
                 }
             });
-            googleplus.setPaintFlags(googleplus.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             twitter.setPaintFlags(twitter.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             github.setPaintFlags(github.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-            googleplus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(urlgooglelus));
-                    startActivity(i);
-                }
-
-            });
             twitter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -124,14 +110,6 @@ public class Helpers {
                 public void onClick(View v) {
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(urlsource));
-                    startActivity(i);
-                }
-            });
-            community.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(urlcommunity));
                     startActivity(i);
                 }
             });

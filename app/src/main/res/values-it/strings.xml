@@ -36,7 +36,6 @@
     <string name="playlist_top_tracks">Le mie canzoni più belle</string>
 
     <string name="timber_source">Invia una segnalazione di bug <u> qui </u> </string>
-    <string name="timber_feature_request">Richiedi qualsiasi nuova funzione nella comunità Google+ <u> qui </u></string>
 
     <string name="menu_show_as">Visualizza come</string>
     <string name="menu_show_as_entry_list">Lista</string>
@@ -76,7 +75,7 @@
     <string name="now_playing_selector">Scegli la schermata di riproduzione tra 4 stili differenti.</string>
     <string name="personalisation">Personalizzazione</string>
     <string name="other">Altro</string>
-    <string name="timber_about_opensource">Timber è un riproduttore musicale open source sviluppato da Naman Dwivedi.</string>
+    <string name="timber_about_opensource">Timber è un riproduttore musicale open source sviluppato da Naman Dwivedi, Vinetos.</string>
     <string name="summary_pause_detach">Abilita pausa della riproduzione quando vengono staccate le cuffie</string>
     <string name="pause_detach">Pausa al distacco</string>
     <string name="currently_selected">Attualmente selezionato</string>

@@ -36,7 +36,6 @@
     <string name="playlist_top_tracks">Mes pistes préférées</string>
 
     <string name="timber_source">Signalez tout bug <u>ici</u></string>
-    <string name="timber_feature_request">Proposez des fonctionnalités dans la communauté Google+ <u>ici</u></string>
 
     <string name="menu_show_as">Affichage</string>
     <string name="menu_show_as_entry_list">Liste</string>
@@ -76,7 +75,7 @@
     <string name="now_playing_selector">Choisir un écran de lecture à partir de 4 styles différents</string>
     <string name="personalisation">Personnalisation</string>
     <string name="other">Autre</string>
-    <string name="timber_about_opensource">Timber est une application open source développée par Naman Dwivedi.</string>
+    <string name="timber_about_opensource">Timber est une application open source développée par Naman Dwivedi, Vinetos.</string>
     <string name="summary_pause_detach">Mettre en pause la lecture lorsque le casque est débranché</string>
     <string name="pause_detach">Pause au débranchement</string>
     <string name="currently_selected">Actuellement sélectionné</string>

@@ -36,7 +36,6 @@
     <string name="playlist_top_tracks">Meine Lieblingslieder</string>
 
     <string name="timber_source">Melden Sie Fehler <u> hier </u> </string>
-    <string name="timber_feature_request">Vorschläge? Posten Sie sie in der <u> Google+ Community </u></string>
 
     <string name="menu_show_as">Ansicht</string>
     <string name="menu_show_as_entry_list">Liste</string>
@@ -76,7 +75,7 @@
     <string name="now_playing_selector">Wählen Sie einen "Now-Playing"-Screen aus 4 verschiedenen Stilen.</string>
     <string name="personalisation">Personifizierung</string>
     <string name="other">Anderes</string>
-    <string name="timber_about_opensource">Timber ist ein offener Musik-Player entwickelt von Naman Dwivedi.</string>
+    <string name="timber_about_opensource">Timber ist ein offener Musik-Player entwickelt von Naman Dwivedi, Vinetos.</string>
     <string name="summary_pause_detach">Wiedergabe pausieren wenn Kopfhörer entfernt werden.</string>
     <string name="pause_detach">Pause beim entfernen</string>
 
