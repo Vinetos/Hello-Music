@@ -15,7 +15,8 @@ if [ "$TRAVIS_BRANCH" = "$BRANCH" ]; then
 
       # Add tag and push to master.
       . ./app/version.properties
-      git tag -a -m  "Travis build $TRAVIS_BUILD_NUMBER pushed a tag." "v$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH ($VERSION_BUILD)"
+      echo "v$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH ($VERSION_BUILD)"
+      git tag -a "v$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH ($VERSION_BUILD)" -m "Travis build $TRAVIS_BUILD_NUMBER pushed a tag."
       git push origin --tags
       git fetch origin
 
