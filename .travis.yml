@@ -13,6 +13,7 @@ android:
 before_script:
 - chmod +x gradlew
 script:
+- sed -i "/^VERSION_NUMBER/s/= .*$/= "$TRAVIS_BUILD_NUMBER"/" app/version.properties
 - "./gradlew clean build -PdisablePreDex --stacktrace"
 notifications:
   email: true
@@ -24,13 +25,11 @@ cache:
   - "$HOME/.gradle"
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-before_deploy:
-- mv app/build/outputs/apk/app-debug.apk app/build/outputs/apk/Hello-Music.apk
 deploy:
   provider: releases
   api_key:
     secure: ApxuJAArpW2U+HhbgOSAYuy+qDy3+WNzFQZQFAGMYORnQW//uKoVCndVQdhxy0IYZVbzFoa7+hawofnHfy9Lsb25+belGbQE/5kO9Ra/CTFBPm+I2AlcQhIJR+CQzyZROQgG/iWmmiggba3M/WktqGXTl7+jWoS3TFVZx/egtLQfOgH+jNOJ/IRC5xJJzwAY/b2pICt8Xarjv8l/wvh2DUXxmcQmV+zcbd6/57qodn29xnFyISYZsEy8HXRFZ41yZbOkgt3I7Vh+DEnX6OYt6YWbUIUjxLJ8yajd3j22cPGeNRDX/6+D0miJtuQ5qz/3ueY2OigPFqbVw5vrjpKc6wCGWNI8dl+Wt/p4uGx9eceZ+JlqfjrHsLMouVjlyUKwIrYCE1npq9oraYXaHrBKrN3nEVg+lxxDN5zhdBsg/LNtscbuoRRKaP5pT9PRAKQdEkhoC9oZFkZp8grJiNLfLO3ppr7u05c99FSFRASQYmkDINxwWaTFGlfLsxdvEAzF4Ooa5o4Rzrt7JdHA7hqZLqWCcSm85rc6wps2K4RdpTAzAEMTj0VXgqm+8Z7rvalHlTv7K9fEWXesuUUgDNFoNDk5Fy1Iulz+wKrXb7njJI47Vka1SumfQnHD+XuRI1sfqhZG4+4EfpTObF6EIbNWSpEAtb2O0gmbQCkXX7b5NFo=
-  file: app/build/outputs/apk/Hello-Music.apk
+  file: apk/*.apk
   on:
     branch: master
     repo: Vinetos/Hello-Music-droid
