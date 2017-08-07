@@ -36,7 +36,7 @@ android {
 
             // Semantic Versioning
             versionCode versionNumber
-            versionName "${versionMajor}.${versionMinor}.${versionPatch} (${versionBuild}) Release"
+            versionName "${versionMajor}.${versionMinor}.${versionPatch}-${versionBuild}"
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
             //renderscript support mode is not supported for 21+ with gradle version 2.0
@@ -50,7 +50,7 @@ android {
                 variant.outputs.each { output2 ->
                     def outputFile = output2.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        output.outputFile = new File(getProject().getRootDir(), "${fileNaming}HelloMusic-${versionMajor}.${versionMinor}.${versionPatch}.apk")
+                        output.outputFile = new File(getProject().getRootDir(), "${fileNaming}HelloMusic-${versionMajor}.${versionMinor}.${versionPatch}-${versionBuild}.apk")
                     }
                 }
             }
