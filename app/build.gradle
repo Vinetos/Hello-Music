@@ -21,9 +21,11 @@ android {
         def versionMinor = versionProps['VERSION_MINOR'].toInteger()
         def versionPatch = versionProps['VERSION_PATCH'].toInteger() + value
         def versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
+        def versionNumber = versionProps['VERSION_NUMBER'].toInteger() + value
 
         versionProps['VERSION_PATCH'] = versionPatch.toString()
         versionProps['VERSION_BUILD'] = versionBuild.toString()
+        versionProps['VERSION_NUMBER'] = versionNumber.toString()
 
         versionProps.store(versionPropsFile.newWriter(), null)
         defaultConfig {
@@ -34,7 +36,7 @@ android {
 
             // Semantic Versioning
             versionCode versionNumber
-            versionName "${versionMajor}.${versionMinor}.${versionPatch}-build.${versionBuild}"
+            versionName "${versionMajor}.${versionMinor}.${versionPatch}-build.${versionBuild}-${versionNumber}"
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
             //renderscript support mode is not supported for 21+ with gradle version 2.0
@@ -48,7 +50,7 @@ android {
                 variant.outputs.each { output2 ->
                     def outputFile = output2.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        output.outputFile = new File(getProject().getRootDir(), "${fileNaming}HelloMusic-${versionMajor}.${versionMinor}.${versionPatch}-build.${versionBuild}.apk")
+                        output.outputFile = new File(getProject().getRootDir(), "${fileNaming}HelloMusic-${versionMajor}.${versionMinor}.${versionPatch}-build.${versionBuild}-${versionNumber}.apk")
                     }
                 }
             }
