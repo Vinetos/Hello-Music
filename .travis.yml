@@ -38,9 +38,6 @@ deploy:
   skip_cleanup: true
 after_success:
 - sh set_tags.sh
-before_install:
-- openssl aes-256-cbc -K $encrypted_b06a29e705be_key -iv $encrypted_b06a29e705be_iv
-  -in HelloMusic_Keystore.jks.enc -out HelloMusic_Keystore.jks -d
 env:
   global:
   - secure: XkXlWOO4n6DF5AGcag2vU+EQZ9QqFu9N4xoUdIEY/2OuY5zou6BHWO6YSpUdtro3pOaGuq54069Dr3g1Pr1sUoG3bse3ThDNVIA9unEAblrJ9U+yySZB093jO3dhzMUSz7PfVOXMeMEtZWIZTvq7bbMI2M3DxlhTE/m5fzC7gOGFWMMBFO/WWouVVWznbZMsQM91YOsOvYAgLMkXQswWrK7c7bOFMpf/kJZEpqVMGJ/yB6FYiJZPrC34gICq7vnEXHjZqpmFUyK1C/FbergwgWYBZ6Ocgj9i5E4DQ50J+D4r0aYdhu40OCqqbOEkvJd4Kd0ne8pKBFLiqRMP7W36emN7qcHlUEhdGqKc+YAm91ebnDdqHdMFYeXvqkUGaNbhm9EWTbr6k5R1K4XkeZ5TIZ7FTe4B8o1TR+t3ZFnb+bCXYGRyPTdRyuC6wJ6LsCtRVDwKCDzpryqcb9hdXKstQ9+xpB4mA0s8klpecNTCsMTItX3kIeZu8pe3xqSKRqF0Cysdp/06KEd4JG53i875jkVHw1bEwhde2qKIi0Dz5Rdi3EmWPcsBC20RWG3ZRtu6mAdwAvPQ5j+v8z7/GgvH73LyZNsL/QiM1uA0fZ1AbQonU4csEkdwRD0jXjDDpC1f/r42Qzb+hd5WQq5T6h0b5KjbPrtBz2ir/chcZELuFZ0=
