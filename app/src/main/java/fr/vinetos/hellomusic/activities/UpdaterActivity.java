@@ -91,7 +91,8 @@ public class UpdaterActivity extends AppCompatActivity {
         spinner.setVisibility(View.VISIBLE);
 
         permissionManager = new PermissionManager(this);
-        permissionManager.checkAndRequestPermissions();
+        if (permissionManager.checkAndRequestPermissions())
+            checkUpdate();
     }
 
     private void checkUpdate() {
