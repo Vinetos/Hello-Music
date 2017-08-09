@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import fr.vinetos.hellomusic.adapters.AudioAdapter;
+import fr.vinetos.hellomusic.utils.NetworkUtils;
 
 /*
  * ==============================================================================
@@ -56,6 +57,7 @@ public class PreferencesManager {
     public static final String PREF_NAME = "fr.vinetos.hellomusic.HelloMusic";
     private static final String AUDIO_CACHE_STORAGE = " AudioCacheStorage";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    private static final String LAST_UPDATE_TIME = "LastUpdateTime";
     // shared pref mode
     private static final int PRIVATE_MODE = 0;
 
@@ -73,6 +75,19 @@ public class PreferencesManager {
 
     public void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean canCheckUpdate(Context context) {
+        long lastUpdateTime = preferences.getLong(LAST_UPDATE_TIME, -1);
+        if (lastUpdateTime == -1)
+            return true;
+        // 1000 * 60 * 60 * 24 * 7 = 604 800 000 = 1 week
+        return System.currentTimeMillis() - lastUpdateTime >= 604_800_000 && NetworkUtils.hasActiveInternetConnection(context);
+    }
+
+    public void updateLastUpdateTime() {
+        editor.putLong(LAST_UPDATE_TIME, System.currentTimeMillis());
         editor.commit();
     }
 

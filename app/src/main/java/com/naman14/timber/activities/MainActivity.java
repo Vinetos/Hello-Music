@@ -54,6 +54,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.vinetos.hellomusic.R;
+import fr.vinetos.hellomusic.activities.UpdaterActivity;
+import fr.vinetos.hellomusic.manager.PreferencesManager;
 
 public class MainActivity extends BaseActivity implements ATEActivityThemeCustomizer {
 
@@ -140,13 +142,20 @@ public class MainActivity extends BaseActivity implements ATEActivityThemeCustom
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         sMainActivity = this;
         action = getIntent().getAction();
 
         isDarkTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("dark_theme", false);
 
         super.onCreate(savedInstanceState);
+
+        // Checking for updates
+        PreferencesManager prefManager = new PreferencesManager(this);
+        if (prefManager.canCheckUpdate(sMainActivity)) {
+            prefManager.updateLastUpdateTime();
+            startActivity(new Intent(this, UpdaterActivity.class));
+        }
+
         setContentView(R.layout.activity_main);
 
         navigationMap.put(Constants.NAVIGATE_LIBRARY, navigateLibrary);

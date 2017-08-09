@@ -6,13 +6,13 @@
     <!-- SDK Override -->
     <uses-sdk tools:overrideLibrary="de.Maxr1998.trackselectorlib" />
 
-    <!-- Download music -->
+    <!-- Download music and check for update -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!-- Listener music -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Listen music -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
 
@@ -27,16 +27,16 @@
 
         <!-- Activities -->
         <!-- Welcome Activity -->
-        <activity android:name=".activities.WelcomeActivity" />
-
-        <!-- Updater Activity -->
-        <activity android:name=".activities.UpdaterActivity">
+        <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Updater Activity -->
+        <activity android:name=".activities.UpdaterActivity" />
 
         <!-- Download Activity -->
         <activity

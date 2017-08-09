@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,7 +31,6 @@ import org.json.JSONObject;
 import java.io.File;
 
 import fr.vinetos.hellomusic.R;
-import fr.vinetos.hellomusic.manager.PermissionManager;
 
 /*
  * ==============================================================================
@@ -80,7 +78,6 @@ public class UpdaterActivity extends AppCompatActivity {
     private String browser_download_url;
     private ProgressBar spinner;
     private TextView textView;
-    private PermissionManager permissionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +87,7 @@ public class UpdaterActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.updaterText);
         spinner.setVisibility(View.VISIBLE);
 
-        permissionManager = new PermissionManager(this);
-        if (permissionManager.checkAndRequestPermissions())
-            checkUpdate();
+        checkUpdate();
     }
 
     private void checkUpdate() {
@@ -118,7 +113,8 @@ public class UpdaterActivity extends AppCompatActivity {
                         // Download the new apk
                         downloadUpdate();
                     } else {
-                        startApp();
+                        // Stop the activity
+                        finish();
                     }
                 } catch (JSONException | PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
@@ -185,15 +181,4 @@ public class UpdaterActivity extends AppCompatActivity {
         registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
-    private void startApp() {
-        spinner.setVisibility(View.GONE);
-        startActivity(new Intent(UpdaterActivity.this, WelcomeActivity.class));
-        finish();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        if (permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults))
-            checkUpdate();
-    }
 }
