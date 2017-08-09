@@ -117,7 +117,7 @@ public class Helpers {
                 PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
                 String version = pInfo.versionName;
                 int versionCode = pInfo.versionCode;
-                appversion.setText("HelloMusic " + version);
+                appversion.setText("HelloMusic " + version + " versionCode: " + versionCode);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }

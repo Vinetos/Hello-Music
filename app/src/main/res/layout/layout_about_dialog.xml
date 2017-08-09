@@ -37,16 +37,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/googleplus"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:paddingTop="10dp"
-            android:text="Google+"
-            android:textSize="17sp" />
-
-        <TextView
             android:id="@+id/twitter"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"

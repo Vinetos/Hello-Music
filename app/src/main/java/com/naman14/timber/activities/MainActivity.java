@@ -323,7 +323,7 @@ public class MainActivity extends BaseActivity implements ATEActivityThemeCustom
                 break;
             case R.id.nav_help:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri data = Uri.parse("mailto:spandanjoshi1997@gmail.com");
+                Uri data = Uri.parse("mailto:contact@vinetos.fr");
                 intent.setData(data);
                 startActivity(intent);
                 break;

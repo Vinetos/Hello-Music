@@ -27,7 +27,10 @@
 
         <!-- Activities -->
         <!-- Welcome Activity -->
-        <activity android:name=".activities.WelcomeActivity">
+        <activity android:name=".activities.WelcomeActivity" />
+
+        <!-- Updater Activity -->
+        <activity android:name=".activities.UpdaterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -105,6 +108,16 @@
         <activity
             android:name="com.naman14.timber.activities.NowPlayingActivity"
             android:theme="@style/AppTheme.FullScreen.Light" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="fr.vinetos.hellomusic.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <receiver android:name="com.naman14.timber.helpers.MediaButtonIntentReceiver">
             <intent-filter>
