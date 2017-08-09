@@ -82,8 +82,8 @@ public class PreferencesManager {
         long lastUpdateTime = preferences.getLong(LAST_UPDATE_TIME, -1);
         if (lastUpdateTime == -1)
             return true;
-        // 1000 * 60 * 60 * 24 * 7 = 604 800 000 = 1 week
-        return System.currentTimeMillis() - lastUpdateTime >= 604_800_000 && NetworkUtils.hasActiveInternetConnection(context);
+        // 1000 * 60 * 60 * 24 = 86400000 = 1 day
+        return System.currentTimeMillis() - lastUpdateTime >= 86_400_000 && NetworkUtils.hasActiveInternetConnection(context);
     }
 
     public void updateLastUpdateTime() {
