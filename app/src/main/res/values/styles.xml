@@ -79,11 +79,11 @@
 
     </style>
 
-    <style name="AppThemeLight" parent="ThemeBaseLight"></style>
+    <style name="AppThemeLight" parent="ThemeBaseLight" />
 
-    <style name="AppThemeNormalLight" parent="ThemeBaseLight"></style>
+    <style name="AppThemeNormalLight" parent="ThemeBaseLight" />
 
-    <style name="AppTheme.FullScreen.Light" parent="ThemeBaseLight"></style>
+    <style name="AppTheme.FullScreen.Light" parent="ThemeBaseLight" />
 
     <style name="AppThemeDark" parent="ThemeBaseDark">
 
