@@ -46,6 +46,6 @@ before_deploy:
 - sh sign_apk.sh
 before_install:
 - openssl aes-256-cbc -K $encrypted_8caf4c3afcae_key -iv $encrypted_8caf4c3afcae_iv
-  -in Keystore.jks.enc -out HelloMusic_Keystore.jks -d
+  -in HelloMusic_Keystore.jks.enc -out HelloMusic_Keystore.jks -d
 - openssl aes-256-cbc -K $encrypted_8caf4c3afcae_key -iv $encrypted_8caf4c3afcae_iv
   -in acra.properties.enc -out app/src/main/assets/acra.properties -d
