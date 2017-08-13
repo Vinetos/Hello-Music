@@ -83,7 +83,7 @@ public class PreferencesManager {
         if (lastUpdateTime == -1)
             return true;
         // 1000 * 60 * 60 * 24 = 86400000 = 1 day
-        return System.currentTimeMillis() - lastUpdateTime >= 86_400_000 && NetworkUtils.hasActiveInternetConnection(context);
+        return System.currentTimeMillis() - lastUpdateTime >= 86_400_000 && NetworkUtils.isNetworkAvailable(context);
     }
 
     public void updateLastUpdateTime() {

@@ -118,12 +118,14 @@ public class UpdaterActivity extends AppCompatActivity {
                     }
                 } catch (JSONException | PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
+                    finish();// End activity if the request failed
                 }
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                finish();// End activity if the request failed
             }
         });
         queue.add(jsonObjectRequest);

@@ -4,10 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 /*
  * ==============================================================================
  *            _    _______   __________________  _____
@@ -55,35 +51,10 @@ public class NetworkUtils {
      * @param context Context of the application
      * @return <code>true</code> is WIFI or MOBILE is activated
      */
-    private static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
-    }
-
-    /**
-     * Check if the mobile have internet access
-     * Timeout: 5s
-     * /!\ Doesn't work in China (china doesn't have access to google, facebook... see https://en.wikipedia.org/wiki/Websites_blocked_in_mainland_China)
-     *
-     * @param context Context of the application
-     * @return <true>true</true> if the mobile can access to a website
-     */
-    public static boolean hasActiveInternetConnection(Context context) {
-        if (isNetworkAvailable(context)) {
-            try {
-                // Need to be http
-                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
-                urlc.setRequestProperty("User-Agent", "HelloMusic-App-Agent");
-                urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(5000);// 5 seconds
-                urlc.connect();
-                return (urlc.getResponseCode() == 200);
-            } catch (IOException e) {
-                return false;
-            }
-        }
-        return false;
     }
 
 }
