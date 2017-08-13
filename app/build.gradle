@@ -94,4 +94,5 @@ dependencies {
     compile('com.github.Vinetos:app-theme-engine:0.5.2@aar') {
         transitive = true
     }
+    compile 'ch.acra:acra:4.9.2@aar'
 }
