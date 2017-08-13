@@ -81,3 +81,7 @@ freeline_project_description.json
 *.rar
 hs_err_pid*
 !gradle-wrapper.jar
+# Sensitive files
+HelloMusic_Keystore.jks
+secrets.tar
+app/src/main/assets/acra.properties
