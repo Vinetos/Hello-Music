@@ -51,8 +51,7 @@ import fr.vinetos.hellomusic.manager.PermissionManager;
 */
 public class WebActivity extends Activity {
 
-    public static final String HOME = "http://m.vinetos.fr";
-    public static final String YOUTUBE_API_HOME = HOME + "/youtube/?url=";
+    public static final String HOME = "http://www.youtubeinmp3.com/fetch/?video=";
     private PermissionManager permissionManager;
 
     @Override
@@ -78,7 +77,6 @@ public class WebActivity extends Activity {
                 if (url != null) {
                     setContentView(R.layout.activity_web);
                     openWebPage(url); // Handle text being sent
-
                 }
 
             }
@@ -145,7 +143,7 @@ public class WebActivity extends Activity {
     private String convertUrl(String url) {
         // Youtube share menu
         if (url.contains("youtube.com") || url.contains("youtu.be"))
-            return YOUTUBE_API_HOME + url;
+            return HOME + url;
         return url;
     }
 
