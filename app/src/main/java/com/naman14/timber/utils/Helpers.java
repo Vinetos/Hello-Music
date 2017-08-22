@@ -58,7 +58,7 @@ public class Helpers {
     public static class AboutDialog extends DialogFragment {
 
         String urltwitter = "https://twitter.com/Vinetos";
-        String urlgithub = "https://github.com/Vinetos/Hello-Music-droid/";
+        String urlgithub = "https://github.com/Vinetos";
         String urlsource = "https://github.com/Vinetos/Hello-Music-droid/issues";
 
         public AboutDialog() {
@@ -117,7 +117,7 @@ public class Helpers {
                 PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
                 String version = pInfo.versionName;
                 int versionCode = pInfo.versionCode;
-                appversion.setText("HelloMusic " + version + " versionCode: " + versionCode);
+                appversion.setText("Timber " + version);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }

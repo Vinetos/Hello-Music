@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.naman14.timber.utils.Constants;
+import com.naman14.timber.utils.NavigationUtils;
 import com.naman14.timber.utils.PreferencesUtility;
 
 import fr.vinetos.hellomusic.R;
@@ -39,7 +40,7 @@ public class SubStyleSelectorFragment extends Fragment {
     SharedPreferences preferences;
     LinearLayout currentStyle;
     View foreground;
-    ImageView styleImage;
+    ImageView styleImage, imgLock;
 
     public static SubStyleSelectorFragment newInstance(int pageNumber, String what) {
         SubStyleSelectorFragment fragment = new SubStyleSelectorFragment();
@@ -57,8 +58,11 @@ public class SubStyleSelectorFragment extends Fragment {
 
         TextView styleName = (TextView) rootView.findViewById(R.id.style_name);
         styleName.setText(String.valueOf(getArguments().getInt(ARG_PAGE_NUMBER) + 1));
+        preferences = getActivity().getSharedPreferences(Constants.FRAGMENT_ID, Context.MODE_PRIVATE);
 
         styleImage = (ImageView) rootView.findViewById(R.id.style_image);
+        imgLock = (ImageView) rootView.findViewById(R.id.img_lock);
+
         styleImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +83,12 @@ public class SubStyleSelectorFragment extends Fragment {
             case 3:
                 styleImage.setImageResource(R.drawable.timber_4_nowplaying_x);
                 break;
+            case 4:
+                styleImage.setImageResource(R.drawable.timber_5_nowplaying_x);
+                break;
+            case 5:
+                styleImage.setImageResource(R.drawable.timber_6_nowplaying_x);
+                break;
         }
 
         currentStyle = (LinearLayout) rootView.findViewById(R.id.currentStyle);
@@ -89,13 +99,30 @@ public class SubStyleSelectorFragment extends Fragment {
         return rootView;
     }
 
+    private boolean isUnlocked() {
+        return getActivity() != null && PreferencesUtility.getInstance(getActivity()).fullUnlocked();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateLockedStatus();
+    }
+
+    private void updateLockedStatus() {
+        if (getArguments().getInt(ARG_PAGE_NUMBER) >= 4 && !isUnlocked()) {
+            imgLock.setVisibility(View.VISIBLE);
+            foreground.setVisibility(View.VISIBLE);
+        } else {
+            imgLock.setVisibility(View.GONE);
+            foreground.setVisibility(View.GONE);
+        }
+    }
+
     public void setCurrentStyle() {
-        preferences = getActivity().getSharedPreferences(Constants.FRAGMENT_ID, Context.MODE_PRIVATE);
         String fragmentID = preferences.getString(Constants.NOWPLAYING_FRAGMENT_ID, Constants.TIMBER3);
 
-        ((StyleSelectorFragment) getParentFragment()).scrollToCurrentStyle(getIntForCurrentNowplaying(fragmentID));
-
-        if (getArguments().getInt(ARG_PAGE_NUMBER) == getIntForCurrentNowplaying(fragmentID)) {
+        if (getArguments().getInt(ARG_PAGE_NUMBER) == NavigationUtils.getIntForCurrentNowplaying(fragmentID)) {
             currentStyle.setVisibility(View.VISIBLE);
             foreground.setVisibility(View.VISIBLE);
         } else {
@@ -128,25 +155,14 @@ public class SubStyleSelectorFragment extends Fragment {
                 return Constants.TIMBER3;
             case 3:
                 return Constants.TIMBER4;
+            case 4:
+                return Constants.TIMBER5;
+            case 5:
+                return Constants.TIMBER6;
             default:
                 return Constants.TIMBER3;
         }
     }
 
-    private int getIntForCurrentNowplaying(String nowPlaying) {
-        switch (nowPlaying) {
-            case Constants.TIMBER1:
-                return 0;
-            case Constants.TIMBER2:
-                return 1;
-            case Constants.TIMBER3:
-                return 2;
-            case Constants.TIMBER4:
-                return 3;
-            default:
-                return 2;
-        }
-
-    }
 
 }

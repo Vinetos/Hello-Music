@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">Timber</string>
     <string name="action_settings">Pengaturan</string>
 
     <string name="accessibility_play">Main</string>
@@ -42,6 +41,7 @@
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
     <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
     <string name="timber_source">Laporkan bug <u> di sini </u></string>
+    <string name="timber_feature_request">Spesifikasikan permintaan fitur dalam komunitas Google+ <u> di sini </u></string>
 
     <string name="menu_show_as">Lihat Sebagai</string>
     <string name="menu_show_as_entry_list">Daftar</string>
@@ -86,7 +86,7 @@
     <string name="now_playing_selector">Pilih layar yang sedang diputar dari 4 gaya yang berbeda.</string>
     <string name="personalisation">Personalisasi</string>
     <string name="other">Lainnya</string>
-    <string name="timber_about_opensource">Timber adalah Pemutar Musik dengan Sumber Terbuka yang dikembangkan oleh Naman Dwivedi, Vinetos.</string>
+    <string name="timber_about_opensource">Timber and HelloMusic adalah Pemutar Musik dengan Sumber Terbuka yang dikembangkan oleh Naman Dwivedi, Vinetos.</string>
     <string name="summary_pause_detach">Berhenti memutar ketika headphone dilepas</string>
     <string name="pause_detach">Jeda saat dilepas</string>
     <string name="currently_selected">Yang Sedang Dipilih</string>

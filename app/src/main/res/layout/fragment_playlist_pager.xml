@@ -49,7 +49,6 @@
                 android:textColor="#ffffff"
                 android:textSize="28sp"
                 android:transitionName="transition_playlist_name" />
-
             <TextView
                 android:id="@+id/songcount"
                 android:layout_width="wrap_content"
@@ -85,7 +84,8 @@
             android:maxLines="2"
             android:text="Auto\nPlaylist"
             android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="gone" />
 
 
     </FrameLayout>

@@ -17,4 +17,3 @@
         app:menu="@menu/drawer_view" />
 
 </android.support.v4.widget.DrawerLayout>
-

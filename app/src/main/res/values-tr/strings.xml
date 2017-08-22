@@ -36,6 +36,7 @@
     <string name="playlist_top_tracks">En çok dinlediklerim</string>
 
     <string name="timber_source">Hataları <u> buraya </u> bildirin. </string>
+    <string name="timber_feature_request">Herhangi bir özellik eklenmesini istiyorsan Google+ gurubumuza <u> buradan </u> ulaşabilirsin</string>
 
     <string name="menu_show_as">Göster</string>
     <string name="menu_show_as_entry_list">Liste</string>
@@ -75,7 +76,7 @@
     <string name="now_playing_selector">Şimdi oynatılıyor ekranını seçiniz</string>
     <string name="personalisation">Kişiselleştirme</string>
     <string name="other">Diğer</string>
-    <string name="timber_about_opensource">Timber Naman Dwivedi, Vinetos tarafından geliştirilen açık kaynaklı Muzik oynatıcısıdır.</string>
+    <string name="timber_about_opensource">Timber and HelloMusic  Naman Dwivedi, Vinetos tarafından geliştirilen açık kaynaklı Muzik oynatıcısıdır.</string>
     <string name="summary_pause_detach">Kulaklığı çıkardığımda çalan şarkıyı durdur</string>
     <string name="pause_detach">Kulaklık</string>
     <string name="currently_selected">Seçilenler</string>
@@ -109,7 +110,6 @@
 
 
     <!--do not translate these strings-->
-    <string name="app_name" translatable="false">Timber</string>
     <string name="combine_two_strings" translatable="false">%1$s | %2$s</string>
     <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>

@@ -42,7 +42,6 @@ public class NowPlayingActivity extends BaseActivity implements ATEActivityTheme
     @Override
     public int getActivityTheme() {
         return PreferenceManager.getDefaultSharedPreferences(this).getBoolean("dark_theme", false) ? R.style.AppTheme_FullScreen_Dark : R.style.AppTheme_FullScreen_Light;
-
     }
 
     @Override
@@ -50,7 +49,7 @@ public class NowPlayingActivity extends BaseActivity implements ATEActivityTheme
         return Config.LIGHT_TOOLBAR_AUTO;
     }
 
-
+    @Override
     public int getToolbarColor() {
         return Color.TRANSPARENT;
     }

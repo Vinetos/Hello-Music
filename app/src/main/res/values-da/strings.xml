@@ -36,6 +36,7 @@
     <string name="playlist_top_tracks">Mine Top Numre</string>
 
     <string name="timber_source">Rapport�r eventuelle fejl <u> her </u> </string>
+    <string name="timber_feature_request">Bed om nye features via Google+ f�llesskabet <u> her </u></string>
 
     <string name="menu_show_as">Vis som</string>
     <string name="menu_show_as_entry_list">Liste</string>
@@ -76,7 +77,7 @@
     <string name="personalisation">Personalisering</string>
     <string name="other">Andet</string>
     <string name="advanced">Avanceret</string>
-    <string name="timber_about_opensource">Timber er en open source Musikafspiller udviklet af Naman Dwivedi, Vinetos.</string>
+    <string name="timber_about_opensource">Timber and HelloMusic er en open source Musikafspiller udviklet af Naman Dwivedi, Vinetos.</string>
     <string name="summary_pause_detach">V�lg for at pause afspilning n�r hovedtelefoner frakobles</string>
     <string name="pause_detach">Pause ved Frakobling</string>
     <string name="summary_xposed_trackselector">Kr�ver Xposed og XMediaNotificationTrackSelector Xposed modul installeret. Dette giver adgang til afspilningsk�en fra selve notifikationslinjen.</string>

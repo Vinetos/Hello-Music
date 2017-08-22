@@ -51,6 +51,7 @@
                 android:textSize="12sp" />
 
 
+
         </LinearLayout>
 
         <net.steamcrafted.materialiconlib.MaterialIconView
@@ -65,7 +66,7 @@
             app:materialIconColor="#fff"
             app:materialIconSize="35dp" />
 
-        <ImageView
+        <com.naman14.timber.widgets.PopupImageView
             android:id="@+id/popup_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +76,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:foregroundTint="#434343"
             android:padding="5dp"
-            android:src="@drawable/abc_ic_menu_overflow_material" />
+            android:src="@drawable/ic_more_vert_black_24dp" />
 
     </RelativeLayout>
 

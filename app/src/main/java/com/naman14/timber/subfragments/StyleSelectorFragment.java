@@ -14,6 +14,8 @@
 
 package com.naman14.timber.subfragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.naman14.timber.utils.Constants;
+import com.naman14.timber.utils.NavigationUtils;
 import com.naman14.timber.widgets.MultiViewPager;
 
 import fr.vinetos.hellomusic.R;
@@ -33,6 +36,7 @@ public class StyleSelectorFragment extends Fragment {
     FragmentStatePagerAdapter adapter;
     MultiViewPager pager;
     private SubStyleSelectorFragment selectorFragment;
+    private SharedPreferences preferences;
 
     public static StyleSelectorFragment newInstance(String what) {
         StyleSelectorFragment fragment = new StyleSelectorFragment();
@@ -48,6 +52,7 @@ public class StyleSelectorFragment extends Fragment {
         if (getArguments() != null) {
             ACTION = getArguments().getString(Constants.SETTINGS_STYLE_SELECTOR_WHAT);
         }
+        preferences = getActivity().getSharedPreferences(Constants.FRAGMENT_ID, Context.MODE_PRIVATE);
     }
 
 
@@ -65,7 +70,7 @@ public class StyleSelectorFragment extends Fragment {
 
             @Override
             public int getCount() {
-                return 4;
+                return 6;
             }
 
             @Override
@@ -80,18 +85,22 @@ public class StyleSelectorFragment extends Fragment {
             }
         };
         pager.setAdapter(adapter);
+        scrollToCurrentStyle();
 
         return rootView;
     }
 
     public void updateCurrentStyle() {
-        if (selectorFragment != null)
+        if (selectorFragment != null) {
             adapter.notifyDataSetChanged();
+            scrollToCurrentStyle();
+        }
 
     }
 
-    public void scrollToCurrentStyle(int page) {
-        pager.setCurrentItem(page);
+    public void scrollToCurrentStyle() {
+        String fragmentID = preferences.getString(Constants.NOWPLAYING_FRAGMENT_ID, Constants.TIMBER3);
+        pager.setCurrentItem(NavigationUtils.getIntForCurrentNowplaying(fragmentID));
     }
 
 }

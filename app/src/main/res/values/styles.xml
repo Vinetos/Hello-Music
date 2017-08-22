@@ -1,19 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <attr name="cardStyle" format="reference" />
     <attr name="accentColor" format="reference" />
     <attr name="iconColor" format="reference" />
@@ -41,7 +27,6 @@
         <item name="ate_key">light_theme</item>
 
     </style>
-
     <style name="ThemeBaseDark" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryDarkTheme</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkDarkTheme</item>
@@ -60,7 +45,6 @@
         <item name="ate_key">dark_theme</item>
 
     </style>
-
     <style name="ThemeBaseBlack" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
@@ -79,11 +63,11 @@
 
     </style>
 
-    <style name="AppThemeLight" parent="ThemeBaseLight" />
+    <style name="AppThemeLight" parent="ThemeBaseLight"></style>
 
-    <style name="AppThemeNormalLight" parent="ThemeBaseLight" />
+    <style name="AppThemeNormalLight" parent="ThemeBaseLight"></style>
 
-    <style name="AppTheme.FullScreen.Light" parent="ThemeBaseLight" />
+    <style name="AppTheme.FullScreen.Light" parent="ThemeBaseLight"></style>
 
     <style name="AppThemeDark" parent="ThemeBaseDark">
 
@@ -97,7 +81,6 @@
     <style name="AppTheme.FullScreen.Dark" parent="ThemeBaseDark">
 
     </style>
-
     <style name="AppThemeBlack" parent="ThemeBaseBlack">
 
 
@@ -151,5 +134,6 @@
     <style name="CardViewStyle.Black" parent="CardView">
         <item name="cardBackgroundColor">@color/window_background_black</item>
     </style>
+
 
 </resources>

@@ -101,16 +101,7 @@ public class MusicPlayer {
     }
 
     public static void initPlaybackServiceWithSettings(final Context context) {
-        setShowAlbumArtOnLockscreen(true);
-    }
 
-    public static void setShowAlbumArtOnLockscreen(final boolean enabled) {
-        try {
-            if (mService != null) {
-                mService.setLockscreenAlbumArt(enabled);
-            }
-        } catch (final RemoteException ignored) {
-        }
     }
 
     public static void asyncNext(final Context context) {
@@ -390,6 +381,15 @@ public class MusicPlayer {
         }
     }
 
+    public static void refresh() {
+        try {
+            if (mService != null) {
+                mService.refresh();
+            }
+        } catch (final RemoteException ignored) {
+        }
+    }
+
     public static final int getQueueHistorySize() {
         if (mService != null) {
             try {
@@ -657,10 +657,11 @@ public class MusicPlayer {
     }
 
     public static void clearQueue() {
-        try {
-            if (mService != null)
+        if (mService != null) {
+            try {
                 mService.removeTracks(0, Integer.MAX_VALUE);
-        } catch (final RemoteException ignored) {
+            } catch (final RemoteException ignored) {
+            }
         }
     }
 

@@ -40,6 +40,8 @@ import com.naman14.timber.nowplaying.Timber1;
 import com.naman14.timber.nowplaying.Timber2;
 import com.naman14.timber.nowplaying.Timber3;
 import com.naman14.timber.nowplaying.Timber4;
+import com.naman14.timber.nowplaying.Timber5;
+import com.naman14.timber.nowplaying.Timber6;
 
 import java.util.ArrayList;
 
@@ -149,12 +151,13 @@ public class NavigationUtils {
         intent.putExtra(Constants.PLAYLIST_FOREGROUND_COLOR, foregroundcolor);
         intent.putExtra(Constants.ALBUM_ID, firstAlbumID);
         intent.putExtra(Constants.PLAYLIST_NAME, playlistName);
+        intent.putExtra(Constants.ACTIVITY_TRANSITION, transitionViews != null);
 
-        if (TimberUtils.isLollipop() && PreferencesUtility.getInstance(context).getAnimations()) {
+        if (transitionViews != null && TimberUtils.isLollipop() && PreferencesUtility.getInstance(context).getAnimations()) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.getInstance(), transitionViews.get(0), transitionViews.get(1), transitionViews.get(2));
-            context.startActivity(intent, options.toBundle());
+            context.startActivityForResult(intent, Constants.ACTION_DELETE_PLAYLIST, options.toBundle());
         } else {
-            context.startActivity(intent);
+            context.startActivityForResult(intent, Constants.ACTION_DELETE_PLAYLIST);
         }
     }
 
@@ -187,8 +190,32 @@ public class NavigationUtils {
                 return new Timber3();
             case Constants.TIMBER4:
                 return new Timber4();
+            case Constants.TIMBER5:
+                return new Timber5();
+            case Constants.TIMBER6:
+                return new Timber6();
             default:
                 return new Timber1();
+        }
+
+    }
+
+    public static int getIntForCurrentNowplaying(String nowPlaying) {
+        switch (nowPlaying) {
+            case Constants.TIMBER1:
+                return 0;
+            case Constants.TIMBER2:
+                return 1;
+            case Constants.TIMBER3:
+                return 2;
+            case Constants.TIMBER4:
+                return 3;
+            case Constants.TIMBER5:
+                return 4;
+            case Constants.TIMBER6:
+                return 5;
+            default:
+                return 2;
         }
 
     }

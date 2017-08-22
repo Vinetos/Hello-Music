@@ -43,6 +43,8 @@ public class Constants {
     public static final String TIMBER2 = "timber2";
     public static final String TIMBER3 = "timber3";
     public static final String TIMBER4 = "timber4";
+    public static final String TIMBER5 = "timber5";
+    public static final String TIMBER6 = "timber6";
 
     public static final String NAVIGATE_SETTINGS = "navigate_settings";
     public static final String NAVIGATE_SEARCH = "navigate_search";
@@ -53,4 +55,17 @@ public class Constants {
     public static final String SETTINGS_STYLE_SELECTOR_WHAT = "style_selector_what";
 
     public static final String SETTINGS_STYLE_SELECTOR = "settings_style_selector";
+
+    public static final int PLAYLIST_VIEW_DEFAULT = 0;
+    public static final int PLAYLIST_VIEW_LIST = 1;
+    public static final int PLAYLIST_VIEW_GRID = 2;
+
+    public static final int PLAYLIST_ALBUM_ART_TAG = 888;
+    public static final int ACTION_DELETE_PLAYLIST = 111;
+
+
+    public static final String ACTIVITY_TRANSITION = "activity_transition";
+
+
+
 }

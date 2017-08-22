@@ -15,10 +15,17 @@
 package com.naman14.timber.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.AsyncTask;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+
+import com.naman14.timber.MusicPlayer;
+import com.naman14.timber.MusicService;
 
 public final class PreferencesUtility {
 
@@ -28,22 +35,35 @@ public final class PreferencesUtility {
     public static final String ALBUM_SORT_ORDER = "album_sort_order";
     public static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
     public static final String SONG_SORT_ORDER = "song_sort_order";
+    public static final String LAST_ADDED_CUTOFF = "last_added_cutoff";
+    public static final String GESTURES = "gestures";
+    public static final String FULL_UNLOCKED = "full_version_unlocked";
     private static final String NOW_PLAYING_SELECTOR = "now_paying_selector";
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
     private static final String TOGGLE_SYSTEM_ANIMATIONS = "toggle_system_animations";
     private static final String TOGGLE_ARTIST_GRID = "toggle_artist_grid";
     private static final String TOGGLE_ALBUM_GRID = "toggle_album_grid";
+    private static final String TOGGLE_PLAYLIST_VIEW = "toggle_playlist_view";
+    private static final String TOGGLE_SHOW_AUTO_PLAYLIST = "toggle_show_auto_playlist";
+    private static final String LAST_FOLDER = "last_folder";
     private static final String TOGGLE_HEADPHONE_PAUSE = "toggle_headphone_pause";
     private static final String THEME_PREFERNCE = "theme_preference";
     private static final String START_PAGE_INDEX = "start_page_index";
     private static final String START_PAGE_PREFERENCE_LASTOPENED = "start_page_preference_latopened";
     private static final String NOW_PLAYNG_THEME_VALUE = "now_playing_theme_value";
     private static final String TOGGLE_XPOSED_TRACKSELECTOR = "toggle_xposed_trackselector";
+    private static final String SHOW_LOCKSCREEN_ALBUMART = "show_albumart_lockscreen";
+    private static final String ARTIST_IMAGE = "artist_image";
+    private static final String ARTIST_IMAGE_MOBILE = "artist_image_mobile";
+
     private static PreferencesUtility sInstance;
 
     private static SharedPreferences mPreferences;
+    private static Context context;
+    private ConnectivityManager connManager = null;
 
     public PreferencesUtility(final Context context) {
+        PreferencesUtility.context = context;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -72,16 +92,9 @@ public final class PreferencesUtility {
     }
 
     public void setArtistsInGrid(final boolean b) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(TOGGLE_ARTIST_GRID, b);
-                editor.apply();
-                return null;
-            }
-        }.execute();
-
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(TOGGLE_ARTIST_GRID, b);
+        editor.apply();
     }
 
     public boolean isAlbumsInGrid() {
@@ -89,16 +102,9 @@ public final class PreferencesUtility {
     }
 
     public void setAlbumsInGrid(final boolean b) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(TOGGLE_ALBUM_GRID, b);
-                editor.apply();
-                return null;
-            }
-        }.execute();
-
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(TOGGLE_ALBUM_GRID, b);
+        editor.apply();
     }
 
     public boolean pauseEnabledOnDetach() {
@@ -114,15 +120,9 @@ public final class PreferencesUtility {
     }
 
     public void setStartPageIndex(final int index) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putInt(START_PAGE_INDEX, index);
-                editor.apply();
-                return null;
-            }
-        }.execute();
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(START_PAGE_INDEX, index);
+        editor.apply();
     }
 
     public void setLastOpenedAsStartPagePreference(boolean preference) {
@@ -136,16 +136,9 @@ public final class PreferencesUtility {
     }
 
     private void setSortOrder(final String key, final String value) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putString(key, value);
-                editor.apply();
-
-                return null;
-            }
-        }.execute();
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 
     public final String getArtistSortOrder() {
@@ -212,4 +205,86 @@ public final class PreferencesUtility {
     public boolean getXPosedTrackselectorEnabled() {
         return mPreferences.getBoolean(TOGGLE_XPOSED_TRACKSELECTOR, false);
     }
+
+    public int getPlaylistView() {
+        return mPreferences.getInt(TOGGLE_PLAYLIST_VIEW, 0);
+    }
+
+    public void setPlaylistView(final int i) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(TOGGLE_PLAYLIST_VIEW, i);
+        editor.apply();
+    }
+
+    public boolean showAutoPlaylist() {
+        return mPreferences.getBoolean(TOGGLE_SHOW_AUTO_PLAYLIST, true);
+    }
+
+    public void setToggleShowAutoPlaylist(final boolean b) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(TOGGLE_SHOW_AUTO_PLAYLIST, b);
+        editor.apply();
+    }
+
+    public long getLastAddedCutoff() {
+        return mPreferences.getLong(LAST_ADDED_CUTOFF, 0L);
+    }
+
+    /**
+     * @parm lastAddedMillis timestamp in millis used as a cutoff for last added playlist
+     */
+    public void setLastAddedCutoff(long lastAddedMillis) {
+        mPreferences.edit().putLong(LAST_ADDED_CUTOFF, lastAddedMillis).apply();
+    }
+
+    public boolean isGesturesEnabled() {
+        return mPreferences.getBoolean(GESTURES, true);
+    }
+
+    public void storeLastFolder(String path) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(LAST_FOLDER, path);
+        editor.apply();
+    }
+
+    public String getLastFolder() {
+        return mPreferences.getString(LAST_FOLDER, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getPath());
+    }
+
+    public boolean fullUnlocked() {
+        return mPreferences.getBoolean(FULL_UNLOCKED, false);
+    }
+
+    public void setFullUnlocked(final boolean b) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(FULL_UNLOCKED, b);
+        editor.apply();
+    }
+
+    public boolean getSetAlbumartLockscreen() {
+        return mPreferences.getBoolean(SHOW_LOCKSCREEN_ALBUMART, true);
+    }
+
+    public void updateService(Bundle extras) {
+        if (!MusicPlayer.isPlaybackServiceConnected()) return;
+        final Intent intent = new Intent(context, MusicService.class);
+        intent.setAction(MusicService.UPDATE_PREFERENCES);
+        intent.putExtras(extras);
+        context.startService(intent);
+    }
+
+    public boolean loadArtistImages() {
+        if (mPreferences.getBoolean(ARTIST_IMAGE, true)) {
+            if (!mPreferences.getBoolean(ARTIST_IMAGE_MOBILE, false)) {
+                if (connManager == null)
+                    connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo ni = connManager.getActiveNetworkInfo();
+                return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
+            }
+            return true;
+        }
+        return false;
+    }
+
 }
+

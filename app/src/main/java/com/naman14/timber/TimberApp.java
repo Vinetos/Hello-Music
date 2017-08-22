@@ -15,12 +15,13 @@
 package com.naman14.timber;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.afollestad.appthemeengine.ATE;
 import com.naman14.timber.permissions.Nammu;
+import com.naman14.timber.utils.PreferencesUtility;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.L;
 
 import org.acra.ACRA;
@@ -34,6 +35,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import fr.vinetos.hellomusic.R;
+
 public class TimberApp extends Application {
 
 
@@ -44,14 +46,10 @@ public class TimberApp extends Application {
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+
         final ACRAConfiguration config;
         try {
             Properties configProps = new Properties();
@@ -69,7 +67,17 @@ public class TimberApp extends Application {
         } catch (ACRAConfigurationException | IOException e) {
             e.printStackTrace();
         }
-        ImageLoaderConfiguration localImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this).build();
+
+        ImageLoaderConfiguration localImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this).imageDownloader(new BaseImageDownloader(this) {
+            PreferencesUtility prefs = PreferencesUtility.getInstance(TimberApp.this);
+
+            @Override
+            protected InputStream getStreamFromNetwork(String imageUri, Object extra) throws IOException {
+                if (prefs.loadArtistImages()) return super.getStreamFromNetwork(imageUri, extra);
+                throw new IOException();
+            }
+        }).build();
+
         ImageLoader.getInstance().init(localImageLoaderConfiguration);
         L.writeLogs(false);
         L.disableLogging();

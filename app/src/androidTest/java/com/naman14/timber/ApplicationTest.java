@@ -1,4 +1,4 @@
-package fr.vinetos.hellomusic;
+package com.naman14.timber;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
