@@ -43,7 +43,6 @@ public class ArtistFragment extends Fragment {
 
     private ArtistAdapter mAdapter;
     private RecyclerView recyclerView;
-    private FastScroller fastScroller;
     private GridLayoutManager layoutManager;
     private RecyclerView.ItemDecoration itemDecoration;
     private PreferencesUtility mPreferences;
@@ -62,7 +61,8 @@ public class ArtistFragment extends Fragment {
                 R.layout.fragment_recyclerview, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
-        fastScroller = (FastScroller) rootView.findViewById(R.id.fastscroller);
+        FastScroller fastScroller = (FastScroller) rootView.findViewById(R.id.fastscroller);
+        fastScroller.setRecyclerView(recyclerView);
 
         setLayoutManager();
 
@@ -74,11 +74,8 @@ public class ArtistFragment extends Fragment {
     private void setLayoutManager() {
         if (isGrid) {
             layoutManager = new GridLayoutManager(getActivity(), 2);
-            fastScroller.setVisibility(View.GONE);
         } else {
             layoutManager = new GridLayoutManager(getActivity(), 1);
-            fastScroller.setVisibility(View.VISIBLE);
-            fastScroller.setRecyclerView(recyclerView);
         }
         recyclerView.setLayoutManager(layoutManager);
     }
