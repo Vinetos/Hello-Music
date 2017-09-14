@@ -51,7 +51,7 @@ import fr.vinetos.hellomusic.manager.PermissionManager;
 */
 public class WebActivity extends Activity {
 
-    public static final String HOME = "http://www.youtubeinmp3.com/fetch/?video=";
+    public static final String HOME = "http://convert2mp3.net/en/index.php?url=";
     private PermissionManager permissionManager;
 
     @Override
