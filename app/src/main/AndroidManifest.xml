@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fr.vinetos.hellomusic"
-    android:installLocation="preferExternal">
+    package="fr.vinetos.hellomusic">
 
-    <!-- SDK Override -->
     <uses-sdk tools:overrideLibrary="de.Maxr1998.trackselectorlib" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,44 +17,20 @@
     <application
         android:name="com.naman14.timber.TimberApp"
         android:allowBackup="false"
-        android:icon="@drawable/ic_logo_square"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_logo_square"
-        android:supportsRtl="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Hello Music${appNameSuffix}"
         android:theme="@style/AppTheme.FullScreen.Light"
         tools:replace="android:allowBackup, android:label">
 
-        <!-- Activities -->
-        <!-- Welcome Activity -->
-        <activity android:name=".activities.WelcomeActivity">
+        <activity
+            android:name="com.naman14.timber.activities.MainActivity"
+            android:label="Hello Music${appNameSuffix}"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- Updater Activity -->
-        <activity android:name=".activities.UpdaterActivity" />
-
-        <!-- Download Activity -->
-        <activity
-            android:name=".activities.WebActivity"
-            android:noHistory="true">
-            <!-- Add to the menu when an application want to share a text (url) -->
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.naman14.timber.activities.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
                 <category android:name="android.intent.category.CATEGORY_APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -110,15 +84,13 @@
             android:name="com.naman14.timber.activities.NowPlayingActivity"
             android:theme="@style/AppTheme.FullScreen.Light" />
 
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="fr.vinetos.hellomusic.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
+        <activity
+            android:name="com.naman14.timber.cast.ExpandedControlsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.ExpandedCastController"
+            android:screenOrientation="portrait">
+
+        </activity>
 
         <receiver android:name="com.naman14.timber.helpers.MediaButtonIntentReceiver">
             <intent-filter>
@@ -140,42 +112,38 @@
             </intent-filter>
         </service>
 
-        <receiver
-            android:name="com.naman14.timber.widgets.desktop.StandardWidget"
-            android:label="@string/widget_standard">
+        <meta-data
+            android:name=
+                "com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+            android:value="com.naman14.timber.cast.CastOptionsProvider" />
+
+        <receiver android:name="com.naman14.timber.widgets.desktop.StandardWidget" android:label="@string/widget_standard">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.naman14.timber.metachanged" />
                 <action android:name="com.naman14.timber.playstatechanged" />
             </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
+            <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_standard" />
         </receiver>
 
-        <receiver
-            android:name="com.naman14.timber.widgets.desktop.WhiteWidget"
-            android:label="@string/widget_white">
+        <receiver android:name="com.naman14.timber.widgets.desktop.WhiteWidget" android:label="@string/widget_white">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.naman14.timber.metachanged" />
                 <action android:name="com.naman14.timber.playstatechanged" />
             </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
+            <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_white" />
         </receiver>
 
-        <receiver
-            android:name="com.naman14.timber.widgets.desktop.SmallWidget"
-            android:label="@string/widget_small">
+        <receiver android:name="com.naman14.timber.widgets.desktop.SmallWidget" android:label="@string/widget_small">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.naman14.timber.metachanged" />
                 <action android:name="com.naman14.timber.playstatechanged" />
             </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
+            <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_small" />
         </receiver>
 

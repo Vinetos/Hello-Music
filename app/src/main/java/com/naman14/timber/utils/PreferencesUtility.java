@@ -35,9 +35,6 @@ public final class PreferencesUtility {
     public static final String ALBUM_SORT_ORDER = "album_sort_order";
     public static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
     public static final String SONG_SORT_ORDER = "song_sort_order";
-    public static final String LAST_ADDED_CUTOFF = "last_added_cutoff";
-    public static final String GESTURES = "gestures";
-    public static final String FULL_UNLOCKED = "full_version_unlocked";
     private static final String NOW_PLAYING_SELECTOR = "now_paying_selector";
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
     private static final String TOGGLE_SYSTEM_ANIMATIONS = "toggle_system_animations";
@@ -46,15 +43,22 @@ public final class PreferencesUtility {
     private static final String TOGGLE_PLAYLIST_VIEW = "toggle_playlist_view";
     private static final String TOGGLE_SHOW_AUTO_PLAYLIST = "toggle_show_auto_playlist";
     private static final String LAST_FOLDER = "last_folder";
+
     private static final String TOGGLE_HEADPHONE_PAUSE = "toggle_headphone_pause";
     private static final String THEME_PREFERNCE = "theme_preference";
     private static final String START_PAGE_INDEX = "start_page_index";
     private static final String START_PAGE_PREFERENCE_LASTOPENED = "start_page_preference_latopened";
     private static final String NOW_PLAYNG_THEME_VALUE = "now_playing_theme_value";
     private static final String TOGGLE_XPOSED_TRACKSELECTOR = "toggle_xposed_trackselector";
+    public static final String LAST_ADDED_CUTOFF = "last_added_cutoff";
+    public static final String GESTURES = "gestures";
+
+    public static final String FULL_UNLOCKED = "full_version_unlocked";
+
     private static final String SHOW_LOCKSCREEN_ALBUMART = "show_albumart_lockscreen";
-    private static final String ARTIST_IMAGE = "artist_image";
-    private static final String ARTIST_IMAGE_MOBILE = "artist_image_mobile";
+    private static final String ARTIST_ALBUM_IMAGE = "artist_album_image";
+    private static final String ARTIST_ALBUM_IMAGE_MOBILE = "artist_album_image_mobile";
+    private static final String ALWAYS_LOAD_ALBUM_IMAGES_LASTFM = "always_load_album_images_lastfm";
 
     private static PreferencesUtility sInstance;
 
@@ -63,7 +67,7 @@ public final class PreferencesUtility {
     private ConnectivityManager connManager = null;
 
     public PreferencesUtility(final Context context) {
-        PreferencesUtility.context = context;
+        this.context = context;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -77,14 +81,6 @@ public final class PreferencesUtility {
 
     public void setOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
         mPreferences.registerOnSharedPreferenceChangeListener(listener);
-    }
-
-    public boolean getAnimations() {
-        return mPreferences.getBoolean(TOGGLE_ANIMATIONS, true);
-    }
-
-    public boolean getSystemAnimations() {
-        return mPreferences.getBoolean(TOGGLE_SYSTEM_ANIMATIONS, true);
     }
 
     public boolean isArtistsInGrid() {
@@ -226,15 +222,15 @@ public final class PreferencesUtility {
         editor.apply();
     }
 
-    public long getLastAddedCutoff() {
-        return mPreferences.getLong(LAST_ADDED_CUTOFF, 0L);
-    }
-
     /**
      * @parm lastAddedMillis timestamp in millis used as a cutoff for last added playlist
      */
     public void setLastAddedCutoff(long lastAddedMillis) {
         mPreferences.edit().putLong(LAST_ADDED_CUTOFF, lastAddedMillis).apply();
+    }
+
+    public long getLastAddedCutoff() {
+        return mPreferences.getLong(LAST_ADDED_CUTOFF, 0L);
     }
 
     public boolean isGesturesEnabled() {
@@ -252,7 +248,7 @@ public final class PreferencesUtility {
     }
 
     public boolean fullUnlocked() {
-        return mPreferences.getBoolean(FULL_UNLOCKED, false);
+        return true;
     }
 
     public void setFullUnlocked(final boolean b) {
@@ -273,9 +269,9 @@ public final class PreferencesUtility {
         context.startService(intent);
     }
 
-    public boolean loadArtistImages() {
-        if (mPreferences.getBoolean(ARTIST_IMAGE, true)) {
-            if (!mPreferences.getBoolean(ARTIST_IMAGE_MOBILE, false)) {
+    public boolean loadArtistAndAlbumImages() {
+        if (mPreferences.getBoolean(ARTIST_ALBUM_IMAGE, true)) {
+            if (!mPreferences.getBoolean(ARTIST_ALBUM_IMAGE_MOBILE, true)) {
                 if (connManager == null)
                     connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo ni = connManager.getActiveNetworkInfo();
@@ -286,5 +282,8 @@ public final class PreferencesUtility {
         return false;
     }
 
+    public boolean alwaysLoadAlbumImagesFromLastfm() {
+        return mPreferences.getBoolean(ALWAYS_LOAD_ALBUM_IMAGES_LASTFM, false);
+    }
 }
 

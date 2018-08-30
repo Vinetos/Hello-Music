@@ -46,7 +46,7 @@ import java.util.concurrent.Executors;
 
 import fr.vinetos.hellomusic.R;
 
-public class SearchActivity extends BaseThemedActivity implements SearchView.OnQueryTextListener, View.OnTouchListener {
+public class SearchActivity extends BaseActivity implements SearchView.OnQueryTextListener, View.OnTouchListener {
 
     private final Executor mSearchExecutor = Executors.newSingleThreadExecutor();
     @Nullable
@@ -107,7 +107,15 @@ public class SearchActivity extends BaseThemedActivity implements SearchView.OnQ
         });
 
         menu.findItem(R.id.menu_search).expandActionView();
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setVisible(false);
+        return true;
     }
 
     @Override

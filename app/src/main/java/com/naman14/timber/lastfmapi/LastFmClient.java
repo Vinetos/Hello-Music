@@ -19,6 +19,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.naman14.timber.lastfmapi.callbacks.AlbumInfoListener;
 import com.naman14.timber.lastfmapi.callbacks.ArtistInfoListener;
 import com.naman14.timber.lastfmapi.callbacks.UserListener;
 import com.naman14.timber.lastfmapi.models.AlbumInfo;
@@ -56,14 +57,18 @@ public class LastFmClient {
 
     public static final String PREFERENCES_NAME = "Lastfm";
     static final String PREFERENCE_CACHE_NAME = "Cache";
-    private static final Object sLock = new Object();
+
     private static LastFmClient sInstance;
     private LastFmRestService mRestService;
     private LastFmUserRestService mUserRestService;
+
     private HashSet<String> queries;
     private boolean isUploading = false;
+
     private Context context;
+
     private LastfmUserSession mUserSession;
+    private static final Object sLock = new Object();
 
     public static LastFmClient getInstance(Context context) {
         synchronized (sLock) {
@@ -96,16 +101,16 @@ public class LastFmClient {
 
     }
 
-    public void getAlbumInfo(AlbumQuery albumQuery) {
+    public void getAlbumInfo(AlbumQuery albumQuery, final AlbumInfoListener listener) {
         mRestService.getAlbumInfo(albumQuery.mArtist, albumQuery.mALbum, new Callback<AlbumInfo>() {
             @Override
             public void success(AlbumInfo albumInfo, Response response) {
-
+                listener.albumInfoSuccess(albumInfo.mAlbum);
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                listener.albumInfoFailed();
                 error.printStackTrace();
             }
         });
@@ -150,20 +155,6 @@ public class LastFmClient {
     public void Scrobble(final ScrobbleQuery scrobbleQuery) {
         if (mUserSession.isLogedin())
             new ScrobbleUploader(scrobbleQuery);
-    }
-
-    public void logout() {
-        this.mUserSession.mToken = null;
-        this.mUserSession.mUsername = null;
-        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.apply();
-    }
-
-    public String getUsername() {
-        if (mUserSession != null) return mUserSession.mUsername;
-        return null;
     }
 
     private class ScrobbleUploader {
@@ -272,5 +263,19 @@ public class LastFmClient {
             editor.apply();
         }
 
+    }
+
+    public void logout() {
+        this.mUserSession.mToken = null;
+        this.mUserSession.mUsername = null;
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public String getUsername() {
+        if (mUserSession != null) return mUserSession.mUsername;
+        return null;
     }
 }

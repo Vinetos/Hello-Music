@@ -95,7 +95,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ItemHolder
                         ImageLoader.getInstance().displayImage(artist.mArtwork.get(2).mUrl, itemHolder.artistImage,
                                 new DisplayImageOptions.Builder().cacheInMemory(true)
                                         .cacheOnDisk(true)
-                                        .showImageOnFail(R.drawable.ic_empty_music2)
+                                        .showImageOnLoading(R.drawable.ic_empty_music2)
                                         .resetViewBeforeLoading(true)
                                         .displayer(new FadeInBitmapDisplayer(400))
                                         .build(), new SimpleImageLoadingListener() {
@@ -137,7 +137,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ItemHolder
                         ImageLoader.getInstance().displayImage(artist.mArtwork.get(1).mUrl, itemHolder.artistImage,
                                 new DisplayImageOptions.Builder().cacheInMemory(true)
                                         .cacheOnDisk(true)
-                                        .showImageOnFail(R.drawable.ic_empty_music2)
+                                        .showImageOnLoading(R.drawable.ic_empty_music2)
                                         .resetViewBeforeLoading(true)
                                         .displayer(new FadeInBitmapDisplayer(400))
                                         .build());
@@ -154,6 +154,11 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ItemHolder
         if (TimberUtils.isLollipop())
             itemHolder.artistImage.setTransitionName("transition_artist_art" + i);
 
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return arraylist.get(position).id;
     }
 
     @Override

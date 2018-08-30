@@ -49,6 +49,10 @@ public class PlayPauseDrawable extends Drawable {
 
 
     private static final String TAG = PlayPauseDrawable.class.getSimpleName();
+    private final Path leftPauseBar = new Path();
+    private final Path rightPauseBar = new Path();
+    private final Paint paint = new Paint();
+    private float progress;
     private static final Property<PlayPauseDrawable, Float> PROGRESS =
             new Property<PlayPauseDrawable, Float>(Float.class, "progress") {
                 @Override
@@ -61,10 +65,6 @@ public class PlayPauseDrawable extends Drawable {
                     d.setProgress(value);
                 }
             };
-    private final Path leftPauseBar = new Path();
-    private final Path rightPauseBar = new Path();
-    private final Paint paint = new Paint();
-    private float progress;
     private boolean isPlay;
     @Nullable
     private Animator animator;

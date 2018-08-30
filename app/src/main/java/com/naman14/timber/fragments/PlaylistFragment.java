@@ -53,10 +53,10 @@ import fr.vinetos.hellomusic.R;
 
 public class PlaylistFragment extends Fragment {
 
-    int playlistcount;
-    FragmentStatePagerAdapter adapter;
-    MultiViewPager pager;
-    RecyclerView recyclerView;
+    private int playlistcount;
+    private FragmentStatePagerAdapter adapter;
+    private MultiViewPager pager;
+    private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
     private RecyclerView.ItemDecoration itemDecoration;
 
@@ -170,6 +170,28 @@ public class PlaylistFragment extends Fragment {
         layoutManager.requestLayout();
         setItemDecoration();
     }
+
+
+    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view,
+                                   RecyclerView parent, RecyclerView.State state) {
+
+
+            outRect.left = space;
+            outRect.top = space;
+            outRect.right = space;
+            outRect.bottom = space;
+
+        }
+    }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -289,26 +311,6 @@ public class PlaylistFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 reloadPlaylists();
             }
-
-        }
-    }
-
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private int space;
-
-        public SpacesItemDecoration(int space) {
-            this.space = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view,
-                                   RecyclerView parent, RecyclerView.State state) {
-
-
-            outRect.left = space;
-            outRect.top = space;
-            outRect.right = space;
-            outRect.bottom = space;
 
         }
     }

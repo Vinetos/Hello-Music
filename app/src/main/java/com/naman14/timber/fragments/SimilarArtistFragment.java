@@ -32,7 +32,7 @@ import fr.vinetos.hellomusic.R;
 
 public class SimilarArtistFragment extends Fragment {
 
-    long artistID = -1;
+    private long artistID = -1;
 
     public static SimilarArtistFragment newInstance(long id) {
         SimilarArtistFragment fragment = new SimilarArtistFragment();

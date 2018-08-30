@@ -31,13 +31,13 @@
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#55000000"
+                    android:background="#99000000"
                     app:layout_heightPercent="20%">
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#33000000" />
+                        android:background="#99000000" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -49,20 +49,20 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="left"
-                            android:layout_marginRight="130dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/song_title"
                                 style="@style/TextAppearance.AppCompat.Body1"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="30dp"
+                                android:layout_marginRight="80dp"
                                 android:ellipsize="end"
                                 android:fontFamily="sans-serif-light"
                                 android:singleLine="true"
@@ -93,16 +93,16 @@
                                 android:id="@+id/shuffle"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginRight="10dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
+                                android:layout_marginRight="10dp"
                                 android:scaleType="center" />
 
                             <ImageView
                                 android:id="@+id/repeat"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="10dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
+                                android:layout_marginLeft="10dp"
                                 android:scaleType="center" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -140,8 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <net.steamcrafted.materialiconlib.MaterialIconView
                     android:id="@+id/previous"
@@ -234,30 +234,30 @@
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/nextView"
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_below="@+id/detailView"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
-            app:layout_heightPercent="15%">
+            android:layout_alignParentBottom="true"
+            app:layout_heightPercent="15%"
+            android:background="?attr/selectableItemBackground">
 
             <com.naman14.timber.widgets.CircleImageView
                 android:id="@+id/album_art_next"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_alignParentLeft="true"
+                android:scaleType="centerCrop"
                 android:layout_centerVertical="true"
-                android:background="#11000000"
-                android:scaleType="centerCrop" />
+                android:background="#11000000" />
 
             <LinearLayout
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/album_art_next"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_centerVertical="true">
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Body1"
@@ -280,9 +280,8 @@
                     android:layout_marginLeft="12dp"
                     android:ellipsize="end"
                     android:fontFamily="sans-serif-light"
-                    android:maxLength="20"
-                    android:maxLines="1"
-                    android:text="Demons"
+                    android:singleLine="true"
+                    android:text="This is a very long song title to test the length of this text view"
                     android:textColor="@android:color/white"
                     android:textSize="17sp" />
 

@@ -13,10 +13,7 @@ public class LastfmUserSession {
     private static final String USERNAME = "name";
     private static final String TOKEN = "key";
     private static LastfmUserSession session;
-    @SerializedName(USERNAME)
-    public String mUsername;
-    @SerializedName(TOKEN)
-    public String mToken;
+
 
     public static LastfmUserSession getSession(Context context) {
         if (session != null) return session;
@@ -42,4 +39,10 @@ public class LastfmUserSession {
         }
         editor.apply();
     }
+
+    @SerializedName(USERNAME)
+    public String mUsername;
+
+    @SerializedName(TOKEN)
+    public String mToken;
 }

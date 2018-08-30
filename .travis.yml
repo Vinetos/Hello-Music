@@ -1,50 +1,16 @@
 language: android
-java: oraclejdk8
 jdk: oraclejdk8
+
+branches:
+  only:
+    - master
+
+script: "./gradlew clean assembleDebug"
+
 android:
   components:
-  - tools
-  - platform-tools
-  - build-tools-26.0.1
-  - android-25
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-before_script:
-- chmod +x gradlew
-script:
-- sed -i "/^VERSION_NUMBER/s/=.*$/="$TRAVIS_BUILD_NUMBER"/" app/version.properties
-- cat app/version.properties
-- "./gradlew assembleRelease -PdisablePreDex --stacktrace"
-notifications:
-  email: true
-before_cache:
-- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-cache:
-  directories:
-  - "$HOME/.m2"
-  - "$HOME/.gradle"
-  - "$HOME/.gradle/caches/"
-  - "$HOME/.gradle/wrapper/"
-deploy:
-  provider: releases
-  api_key:
-    secure: ApxuJAArpW2U+HhbgOSAYuy+qDy3+WNzFQZQFAGMYORnQW//uKoVCndVQdhxy0IYZVbzFoa7+hawofnHfy9Lsb25+belGbQE/5kO9Ra/CTFBPm+I2AlcQhIJR+CQzyZROQgG/iWmmiggba3M/WktqGXTl7+jWoS3TFVZx/egtLQfOgH+jNOJ/IRC5xJJzwAY/b2pICt8Xarjv8l/wvh2DUXxmcQmV+zcbd6/57qodn29xnFyISYZsEy8HXRFZ41yZbOkgt3I7Vh+DEnX6OYt6YWbUIUjxLJ8yajd3j22cPGeNRDX/6+D0miJtuQ5qz/3ueY2OigPFqbVw5vrjpKc6wCGWNI8dl+Wt/p4uGx9eceZ+JlqfjrHsLMouVjlyUKwIrYCE1npq9oraYXaHrBKrN3nEVg+lxxDN5zhdBsg/LNtscbuoRRKaP5pT9PRAKQdEkhoC9oZFkZp8grJiNLfLO3ppr7u05c99FSFRASQYmkDINxwWaTFGlfLsxdvEAzF4Ooa5o4Rzrt7JdHA7hqZLqWCcSm85rc6wps2K4RdpTAzAEMTj0VXgqm+8Z7rvalHlTv7K9fEWXesuUUgDNFoNDk5Fy1Iulz+wKrXb7njJI47Vka1SumfQnHD+XuRI1sfqhZG4+4EfpTObF6EIbNWSpEAtb2O0gmbQCkXX7b5NFo=
-  file_glob: true
-  file: release/*
-  on:
-    branch: master
-    repo: Vinetos/Hello-Music-droid
-  skip_cleanup: true
-after_success:
-- sh set_tags.sh
-env:
-  global:
-  - secure: XkXlWOO4n6DF5AGcag2vU+EQZ9QqFu9N4xoUdIEY/2OuY5zou6BHWO6YSpUdtro3pOaGuq54069Dr3g1Pr1sUoG3bse3ThDNVIA9unEAblrJ9U+yySZB093jO3dhzMUSz7PfVOXMeMEtZWIZTvq7bbMI2M3DxlhTE/m5fzC7gOGFWMMBFO/WWouVVWznbZMsQM91YOsOvYAgLMkXQswWrK7c7bOFMpf/kJZEpqVMGJ/yB6FYiJZPrC34gICq7vnEXHjZqpmFUyK1C/FbergwgWYBZ6Ocgj9i5E4DQ50J+D4r0aYdhu40OCqqbOEkvJd4Kd0ne8pKBFLiqRMP7W36emN7qcHlUEhdGqKc+YAm91ebnDdqHdMFYeXvqkUGaNbhm9EWTbr6k5R1K4XkeZ5TIZ7FTe4B8o1TR+t3ZFnb+bCXYGRyPTdRyuC6wJ6LsCtRVDwKCDzpryqcb9hdXKstQ9+xpB4mA0s8klpecNTCsMTItX3kIeZu8pe3xqSKRqF0Cysdp/06KEd4JG53i875jkVHw1bEwhde2qKIi0Dz5Rdi3EmWPcsBC20RWG3ZRtu6mAdwAvPQ5j+v8z7/GgvH73LyZNsL/QiM1uA0fZ1AbQonU4csEkdwRD0jXjDDpC1f/r42Qzb+hd5WQq5T6h0b5KjbPrtBz2ir/chcZELuFZ0=
-  - secure: WfnP7fSoQf1RZHXu58Svv01lbd2Hv43aXKYBnx+DQ1z9Zl8PGfYSG1Bo32VFPg1PnAYfObnGrmPPZflyr5hZWg63CSUXX1RdIvgCQG/MoNpsfI2y+CiugikmQvY2xOBM+i7pWQ9jWRKIZPAmLjIS6uMZpCVRxlbyQSTXhbMU8zwCKP54MfDhC6XUpmtm6MYmmuQThFdbuxohIuvlWZr5wgS74V8Ikgv4BRpXL/dfu8SYElipfnceY78o3cp70RNm+ludiJ0+9nSxwWlVvHvLKA3Os+lDwoRmXnliaFDIFhrNMTnr8O+8YRi8F/0cv5V7hptd0MLDmbrsAYIb/D2f5ehMRWqOgfEWVoTilnEokWaBASJ+IhO6IBka0F+r8FK7Wkq9Ba0AQ29+J9z5qDvRVH5DK9nP35JdJE6KeoLpIgYWzHl5bsQSYV+PXcz/ryljBQ/DRIaF6gl+2DxnYGpIXnhu2xIMlh40hoD1Rg+pCRl73bWgdm7foui/5Hja0W46aWPcfz5LQRBfzZ1EKy6lDeCasgcWBXdlAZjwyBsdo2Id4ltx3WTUMMFT8kstq3qN/pEhyD3FiVPHezxG0jYN/wpxrqrPQ0G8TXgc5aAGKtgh3/q4ao3z/vt07BmMIzvEXQlVASAIJxOgnCYBO/AXiHPUzVVKU3SWaM6RYdbckjk=
-before_deploy:
-- sh sign_apk.sh
-before_install:
-- openssl aes-256-cbc -K $encrypted_8caf4c3afcae_key -iv $encrypted_8caf4c3afcae_iv
-  -in secrets.tar.enc -out secrets.tar -d
-- tar xvf secrets.tar
+      - platform-tools
+      - tools
+      - build-tools-26.0.2
+      - android-26
+      - extra-android-m2repository

@@ -66,23 +66,12 @@ public class PlayTransition extends Transition {
         a.recycle();
     }
 
-    static float calculateMaxRadius(View view) {
-        float widthSquared = view.getWidth() * view.getWidth();
-        float heightSquared = view.getHeight() * view.getHeight();
-        float radius = (float) Math.sqrt(widthSquared + heightSquared) / 2;
-        return radius;
-    }
-
-    static int calculateMinRadius(View view) {
-        return Math.min(view.getWidth() / 2, view.getHeight() / 2);
+    public void setColor(int color) {
+        mColor = color;
     }
 
     public int getColor() {
         return mColor;
-    }
-
-    public void setColor(int color) {
-        mColor = color;
     }
 
     @Override
@@ -260,6 +249,17 @@ public class PlayTransition extends Transition {
         return new NoPauseAnimator(reveal);
     }
 
+    static float calculateMaxRadius(View view) {
+        float widthSquared = view.getWidth() * view.getWidth();
+        float heightSquared = view.getHeight() * view.getHeight();
+        float radius = (float) Math.sqrt(widthSquared + heightSquared) / 2;
+        return radius;
+    }
+
+    static int calculateMinRadius(View view) {
+        return Math.min(view.getWidth() / 2, view.getHeight() / 2);
+    }
+
     private static class NoPauseAnimator extends Animator {
         private final Animator mAnimator;
         private final ArrayMap<AnimatorListener, AnimatorListener> mListeners =
@@ -299,11 +299,6 @@ public class PlayTransition extends Transition {
         }
 
         @Override
-        public void setInterpolator(TimeInterpolator timeInterpolator) {
-            mAnimator.setInterpolator(timeInterpolator);
-        }
-
-        @Override
         public ArrayList<AnimatorListener> getListeners() {
             return new ArrayList<AnimatorListener>(mListeners.keySet());
         }
@@ -311,11 +306,6 @@ public class PlayTransition extends Transition {
         @Override
         public long getStartDelay() {
             return mAnimator.getStartDelay();
-        }
-
-        @Override
-        public void setStartDelay(long delayMS) {
-            mAnimator.setStartDelay(delayMS);
         }
 
         @Override
@@ -352,6 +342,16 @@ public class PlayTransition extends Transition {
         public Animator setDuration(long durationMS) {
             mAnimator.setDuration(durationMS);
             return this;
+        }
+
+        @Override
+        public void setInterpolator(TimeInterpolator timeInterpolator) {
+            mAnimator.setInterpolator(timeInterpolator);
+        }
+
+        @Override
+        public void setStartDelay(long delayMS) {
+            mAnimator.setStartDelay(delayMS);
         }
 
         @Override

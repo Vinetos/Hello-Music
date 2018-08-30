@@ -60,8 +60,10 @@ public class StandardWidget extends BaseWidget {
                 remoteViews.setTextViewText(R.id.textView_title, t);
             }
             t = extras.getString("artist");
+            ;
             if (t != null) {
                 String album = extras.getString("album");
+                ;
                 if (!TextUtils.isEmpty(album)) {
                     t += " - " + album;
                 }

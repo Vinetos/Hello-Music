@@ -76,7 +76,6 @@
     <string name="now_playing_selector">Выбрать тему для экрана проигрывания из 4-х различных стилей.</string>
     <string name="personalisation">Персонализация</string>
     <string name="other">Прочее</string>
-    <string name="timber_about_opensource">Timber and HelloMusic это музыкальный плеер с открытым исходным кодом который разработан Наманом Двиведи.</string>
     <string name="summary_pause_detach">Включить автоматическую паузу при отсоединении наушников</string>
     <string name="pause_detach">Пауза при отсоединении</string>
     <string name="currently_selected">Сейчас выбрано</string>

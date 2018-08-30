@@ -34,24 +34,6 @@ public class SlideTrackSwitcher implements View.OnTouchListener {
         return mDetector.onTouchEvent(event);
     }
 
-    public void onSwipeRight() {
-        MusicPlayer.previous(mView.getContext(), true);
-    }
-
-    public void onSwipeLeft() {
-        MusicPlayer.next();
-    }
-
-    public void onSwipeTop() {
-    }
-
-    public void onSwipeBottom() {
-    }
-
-    public void onClick() {
-
-    }
-
     private class SwipeListener extends GestureDetector.SimpleOnGestureListener {
 
         @Override
@@ -100,5 +82,23 @@ public class SlideTrackSwitcher implements View.OnTouchListener {
             onClick();
             return super.onSingleTapConfirmed(e);
         }
+    }
+
+    public void onSwipeRight() {
+        MusicPlayer.previous(mView.getContext(), true);
+    }
+
+    public void onSwipeLeft() {
+        MusicPlayer.next();
+    }
+
+    public void onSwipeTop() {
+    }
+
+    public void onSwipeBottom() {
+    }
+
+    public void onClick() {
+
     }
 }

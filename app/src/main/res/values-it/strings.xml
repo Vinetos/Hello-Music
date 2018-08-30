@@ -76,7 +76,6 @@
     <string name="now_playing_selector">Scegli la schermata di riproduzione tra 4 stili differenti.</string>
     <string name="personalisation">Personalizzazione</string>
     <string name="other">Altro</string>
-    <string name="timber_about_opensource">Timber and HelloMusic è un riproduttore musicale open source sviluppato da Naman Dwivedi, Vinetos.</string>
     <string name="summary_pause_detach">Abilita pausa della riproduzione quando vengono staccate le cuffie</string>
     <string name="pause_detach">Pausa al distacco</string>
     <string name="currently_selected">Attualmente selezionato</string>

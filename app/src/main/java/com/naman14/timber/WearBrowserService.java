@@ -57,8 +57,10 @@ public class WearBrowserService extends MediaBrowserService {
     public static final int TYPE_ALBUM_SONGS = 5;
     public static final int TYPE_ARTIST_ALL_SONGS = 6;
     public static final int TYPE_PLAYLIST_ALL_SONGS = 7;
-    public static WearBrowserService sInstance;
+
     MediaSession mSession;
+    public static WearBrowserService sInstance;
+
     private Context mContext;
     private boolean mServiceStarted;
 
@@ -101,6 +103,61 @@ public class WearBrowserService extends MediaBrowserService {
     @Override
     public BrowserRoot onGetRoot(String clientPackageName, int clientUid, Bundle rootHints) {
         return new BrowserRoot(MEDIA_ID_ROOT, null);
+    }
+
+    private final class MediaSessionCallback extends MediaSession.Callback {
+
+        @Override
+        public void onPlay() {
+            setSessionActive();
+        }
+
+        @Override
+        public void onSeekTo(long position) {
+
+        }
+
+        @Override
+        public void onPlayFromMediaId(final String mediaId, Bundle extras) {
+            long songId = Long.parseLong(mediaId);
+            setSessionActive();
+            MusicPlayer.playAll(mContext, new long[]{songId}, 0, -1, TimberUtils.IdType.NA, false);
+        }
+
+        @Override
+        public void onPause() {
+
+        }
+
+        @Override
+        public void onStop() {
+            setSessionInactive();
+        }
+
+        @Override
+        public void onSkipToNext() {
+
+        }
+
+        @Override
+        public void onSkipToPrevious() {
+
+        }
+
+        @Override
+        public void onFastForward() {
+
+        }
+
+        @Override
+        public void onRewind() {
+
+        }
+
+        @Override
+        public void onCustomAction(String action, Bundle extras) {
+
+        }
     }
 
     private void setSessionActive() {
@@ -168,6 +225,7 @@ public class WearBrowserService extends MediaBrowserService {
         ));
 
     }
+
 
     private void loadChildren(final String parentId, final Result<List<MediaBrowser.MediaItem>> result) {
 
@@ -262,61 +320,6 @@ public class WearBrowserService extends MediaBrowserService {
                         .setSubtitle(subTitle)
                         .build(), playableOrBrowsable
         ));
-    }
-
-    private final class MediaSessionCallback extends MediaSession.Callback {
-
-        @Override
-        public void onPlay() {
-            setSessionActive();
-        }
-
-        @Override
-        public void onSeekTo(long position) {
-
-        }
-
-        @Override
-        public void onPlayFromMediaId(final String mediaId, Bundle extras) {
-            long songId = Long.parseLong(mediaId);
-            setSessionActive();
-            MusicPlayer.playAll(mContext, new long[]{songId}, 0, -1, TimberUtils.IdType.NA, false);
-        }
-
-        @Override
-        public void onPause() {
-
-        }
-
-        @Override
-        public void onStop() {
-            setSessionInactive();
-        }
-
-        @Override
-        public void onSkipToNext() {
-
-        }
-
-        @Override
-        public void onSkipToPrevious() {
-
-        }
-
-        @Override
-        public void onFastForward() {
-
-        }
-
-        @Override
-        public void onRewind() {
-
-        }
-
-        @Override
-        public void onCustomAction(String action, Bundle extras) {
-
-        }
     }
 
 }

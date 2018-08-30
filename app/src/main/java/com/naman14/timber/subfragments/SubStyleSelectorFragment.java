@@ -36,11 +36,11 @@ public class SubStyleSelectorFragment extends Fragment {
 
     private static final String ARG_PAGE_NUMBER = "pageNumber";
     private static final String WHAT = "what";
-    SharedPreferences.Editor editor;
-    SharedPreferences preferences;
-    LinearLayout currentStyle;
-    View foreground;
-    ImageView styleImage, imgLock;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences preferences;
+    private LinearLayout currentStyle;
+    private View foreground;
+    private ImageView styleImage, imgLock;
 
     public static SubStyleSelectorFragment newInstance(int pageNumber, String what) {
         SubStyleSelectorFragment fragment = new SubStyleSelectorFragment();
@@ -56,12 +56,12 @@ public class SubStyleSelectorFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_style_selector_pager, container, false);
 
-        TextView styleName = (TextView) rootView.findViewById(R.id.style_name);
+        TextView styleName = rootView.findViewById(R.id.style_name);
         styleName.setText(String.valueOf(getArguments().getInt(ARG_PAGE_NUMBER) + 1));
         preferences = getActivity().getSharedPreferences(Constants.FRAGMENT_ID, Context.MODE_PRIVATE);
 
-        styleImage = (ImageView) rootView.findViewById(R.id.style_image);
-        imgLock = (ImageView) rootView.findViewById(R.id.img_lock);
+        styleImage = rootView.findViewById(R.id.style_image);
+        imgLock = rootView.findViewById(R.id.img_lock);
 
         styleImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class SubStyleSelectorFragment extends Fragment {
                 break;
         }
 
-        currentStyle = (LinearLayout) rootView.findViewById(R.id.currentStyle);
+        currentStyle = rootView.findViewById(R.id.currentStyle);
         foreground = rootView.findViewById(R.id.foreground);
 
         setCurrentStyle();
@@ -100,7 +100,7 @@ public class SubStyleSelectorFragment extends Fragment {
     }
 
     private boolean isUnlocked() {
-        return getActivity() != null && PreferencesUtility.getInstance(getActivity()).fullUnlocked();
+        return true;
     }
 
     @Override
@@ -133,7 +133,6 @@ public class SubStyleSelectorFragment extends Fragment {
     }
 
     private void setPreferences() {
-
         if (getArguments().getString(WHAT).equals(Constants.SETTINGS_STYLE_SELECTOR_NOWPLAYING)) {
             editor = getActivity().getSharedPreferences(Constants.FRAGMENT_ID, Context.MODE_PRIVATE).edit();
             editor.putString(Constants.NOWPLAYING_FRAGMENT_ID, getStyleForPageNumber());

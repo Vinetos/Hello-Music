@@ -52,7 +52,6 @@ public abstract class BaseWidget extends AppWidgetProvider {
 
     abstract void onViewsUpdate(Context context, RemoteViews remoteViews, ComponentName serviceName, Bundle extras);
 
-    abstract
-    @LayoutRes
+    abstract @LayoutRes
     int getLayoutRes();
 }

@@ -33,8 +33,8 @@ import fr.vinetos.hellomusic.R;
 public class StyleSelectorFragment extends Fragment {
 
     public String ACTION = "action";
-    FragmentStatePagerAdapter adapter;
-    MultiViewPager pager;
+    private FragmentStatePagerAdapter adapter;
+    private MultiViewPager pager;
     private SubStyleSelectorFragment selectorFragment;
     private SharedPreferences preferences;
 

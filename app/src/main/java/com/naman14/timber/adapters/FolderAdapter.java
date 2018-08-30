@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.naman14.timber.MusicPlayer;
 import com.naman14.timber.dataloaders.FolderLoader;
 import com.naman14.timber.dataloaders.SongLoader;
 import com.naman14.timber.models.Song;
@@ -37,14 +36,14 @@ import fr.vinetos.hellomusic.R;
  * Created by nv95 on 10.11.16.
  */
 
-public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ItemHolder> implements BubbleTextGetter {
+public class FolderAdapter extends BaseSongAdapter<FolderAdapter.ItemHolder> implements BubbleTextGetter {
 
-    private final Drawable[] mIcons;
     @NonNull
     private List<File> mFileSet;
     private List<Song> mSongs;
     private File mRoot;
     private Activity mContext;
+    private final Drawable[] mIcons;
     private boolean mBusy = false;
 
 
@@ -246,7 +245,8 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ItemHolder
                                 j++;
                             }
                         }
-                        MusicPlayer.playAll(mContext, ret, current, -1, TimberUtils.IdType.NA, false);
+                        playAll(mContext, ret, current, -1, TimberUtils.IdType.NA,
+                                false, mSongs.get(getAdapterPosition()), false);
                     }
                 }, 100);
 

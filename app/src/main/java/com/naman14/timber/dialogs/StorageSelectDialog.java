@@ -40,16 +40,6 @@ public class StorageSelectDialog implements DialogInterface.OnClickListener {
                 .create();
     }
 
-    private static File[] getAvailableStorages(Context context) {
-        File storageRoot = new File("/storage");
-        return storageRoot.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.canRead();
-            }
-        });
-    }
-
     public StorageSelectDialog setDirSelectListener(OnDirSelectListener dirSelectListener) {
         this.mDirSelectListener = dirSelectListener;
         return this;
@@ -63,6 +53,17 @@ public class StorageSelectDialog implements DialogInterface.OnClickListener {
     public void onClick(DialogInterface dialogInterface, int position) {
         File dir = mStorages[position];
         mDirSelectListener.onDirSelected(dir);
+    }
+
+
+    private static File[] getAvailableStorages(Context context) {
+        File storageRoot = new File("/storage");
+        return storageRoot.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.canRead();
+            }
+        });
     }
 
     public interface OnDirSelectListener {
