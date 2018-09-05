@@ -15,7 +15,14 @@
 package com.naman14.timber.activities;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -24,6 +31,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -36,6 +44,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.appthemeengine.customizers.ATEActivityThemeCustomizer;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.google.android.gms.cast.framework.media.widget.ExpandedControllerActivity;
 import com.naman14.timber.MusicPlayer;
@@ -57,12 +71,18 @@ import com.naman14.timber.utils.TimberUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import fr.vinetos.hellomusic.R;
 
 public class MainActivity extends BaseActivity implements ATEActivityThemeCustomizer {
+
+    private static final String API_URL = "https://api.github.com/repos/vinetos/Hello-music-droid/releases/latest";
 
     private SlidingUpPanelLayout panelLayout;
     private NavigationView navigationView;
@@ -211,6 +231,7 @@ public class MainActivity extends BaseActivity implements ATEActivityThemeCustom
             //checkWritePermissions();
         } else {
             loadEverything();
+            checkForUpdate();
         }
 
         addBackstackListener();
@@ -251,6 +272,54 @@ public class MainActivity extends BaseActivity implements ATEActivityThemeCustom
             });
         }
 
+    }
+
+    private void checkForUpdate() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, API_URL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    // Parse JSON
+                    String tag_name = (String) response.get("tag_name");
+                    String tagVersion = tag_name.substring(1);
+                    JSONArray assets = response.getJSONArray("assets");
+                    String browser_download_url = assets.getJSONObject(0).getString("browser_download_url");
+
+                    // Get App infos
+                    PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    String version = pInfo.versionName;
+
+                    // Update available
+                    if (!tagVersion.equals(version)) {
+                        // New Update available
+                        Intent notificationIntent = new Intent(Intent.ACTION_VIEW);
+                        notificationIntent.setData(Uri.parse(browser_download_url));
+                        PendingIntent pi = PendingIntent.getActivity(MainActivity.this, 0, notificationIntent, 0);
+
+                        Notification notification = new NotificationCompat.Builder(MainActivity.this, "hellomusic_update")
+                                .setTicker("Update available for Hello Music !")
+                                .setSmallIcon(android.R.drawable.ic_menu_upload)
+                                .setContentTitle("Update for Hello Music !")
+                                .setContentText("Click here to download.")
+                                .setContentIntent(pi)
+                                .setAutoCancel(true)
+                                .build();
+
+                        NotificationManager notificationManager =  (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
+                        notificationManager.notify(0, notification);
+                    }
+                } catch (JSONException | PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
     private void loadEverything() {

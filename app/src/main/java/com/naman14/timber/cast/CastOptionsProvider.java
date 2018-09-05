@@ -35,7 +35,7 @@ public class CastOptionsProvider implements OptionsProvider {
                 .build();
 
         CastOptions castOptions = new CastOptions.Builder()
-                .setReceiverApplicationId(appContext.getString(R.string.cast_app_id))
+                .setReceiverApplicationId("12345")
                 .setCastMediaOptions(mediaOptions)
                 .build();
 
