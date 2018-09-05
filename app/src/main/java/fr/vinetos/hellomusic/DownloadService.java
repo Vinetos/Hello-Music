@@ -2,15 +2,12 @@ package fr.vinetos.hellomusic;
 
 import android.app.DownloadManager;
 import android.app.IntentService;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
@@ -41,7 +38,6 @@ public class DownloadService extends IntentService {
     }
 
     private void askForInfos(final String url) {
-        sendToast("Getting video data");
         // Get the data of the video form the api
         final OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder().url(url).build();
@@ -62,7 +58,7 @@ public class DownloadService extends IntentService {
                     final JSONObject jsonObject = new JSONObject(jsonData);
                     final String error = jsonObject.optString("error");
                     if (!error.isEmpty()) {
-                        sendToast(error +", Code : 3");
+                        sendToast(error + ", Code : 3");
                         return;
                     }
                     final String downloadUrl = jsonObject.getString("downloadUrl");
@@ -86,8 +82,13 @@ public class DownloadService extends IntentService {
         downloadManager.enqueue(downloadRequest);
     }
 
-    private void sendToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    private void sendToast(final String message) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(DownloadService.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
