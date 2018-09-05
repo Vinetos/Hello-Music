@@ -18,18 +18,17 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [ appNameSuffix:""]
+            manifestPlaceholders = [appNameSuffix: ""]
 
         }
         debug {
             versionNameSuffix "-debug"
             minifyEnabled false
             applicationIdSuffix '.dev'
-            manifestPlaceholders = [ appNameSuffix:" Dev"]
+            manifestPlaceholders = [appNameSuffix: " Dev"]
 
-            resValue "string", "play_billing_license_key", "12345"
             resValue "string", "cast_app_id", "12345"
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -76,6 +75,8 @@ dependencies {
     }
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation 'com.github.tony19:named-regexp:0.2.5'
 
-
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.volley:volley:1.1.1'
 }

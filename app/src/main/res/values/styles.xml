@@ -1,13 +1,13 @@
 <resources>
 
-    <attr format="reference" name="cardStyle" />
-    <attr format="reference" name="accentColor" />
-    <attr format="reference" name="iconColor" />
-    <attr format="reference" name="windowBackground" />
-    <attr format="reference" name="progressBackgroundColor" />
-    <attr format="reference" name="progressDrawable" />
-    <attr format="reference" name="progressDrawableWithBackground" />
-    <attr format="reference" name="stateSelector" />
+    <attr name="cardStyle" format="reference" />
+    <attr name="accentColor" format="reference" />
+    <attr name="iconColor" format="reference" />
+    <attr name="windowBackground" format="reference" />
+    <attr name="progressBackgroundColor" format="reference" />
+    <attr name="progressDrawable" format="reference" />
+    <attr name="progressDrawableWithBackground" format="reference" />
+    <attr name="stateSelector" format="reference" />
 
 
     <style name="ThemeBaseLight" parent="Theme.AppCompat.Light.NoActionBar">
@@ -158,6 +158,18 @@
         <item name="castExpandedControllerToolbarStyle">
             @style/ThemeOverlay.AppCompat.Dark.ActionBar
         </item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme.FullScreen.Light">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
     </style>
 
 

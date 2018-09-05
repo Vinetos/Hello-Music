@@ -167,4 +167,9 @@
     <string name="now_playing_no_track_selected">\"No current track selected.</string>
     <string name="lyrics_loading">Loading...</string>
 
+    <string name="title_activity_auto_update">AutoUpdateActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="checking_for_update">Checking for update</string>
+
 </resources>
