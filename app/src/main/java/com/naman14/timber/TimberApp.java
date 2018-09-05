@@ -14,7 +14,7 @@
 
 package com.naman14.timber;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.afollestad.appthemeengine.ATE;
 import com.naman14.timber.permissions.Nammu;
@@ -24,19 +24,12 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.L;
 
-import org.acra.ACRA;
-import org.acra.config.ACRAConfiguration;
-import org.acra.config.ACRAConfigurationException;
-import org.acra.config.ConfigurationBuilder;
-import org.acra.sender.HttpSender;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 
 import fr.vinetos.hellomusic.R;
 
-public class TimberApp extends Application {
+public class TimberApp extends MultiDexApplication {
 
 
     private static TimberApp mInstance;
@@ -50,30 +43,13 @@ public class TimberApp extends Application {
         super.onCreate();
         mInstance = this;
 
-        final ACRAConfiguration config;
-        try {
-            Properties configProps = new Properties();
-            InputStream in = getAssets().open("acra.properties");
-            configProps.load(in);
-            in.close();
-            config = new ConfigurationBuilder(this)
-                    .setFormUri(configProps.getProperty("FORM-URI"))
-                    .setReportType(HttpSender.Type.JSON)
-                    .setHttpMethod(HttpSender.Method.PUT)
-                    .setFormUriBasicAuthLogin(configProps.getProperty("USERNAME"))
-                    .setFormUriBasicAuthPassword(configProps.getProperty("PASSWORD"))
-                    .build();
-            ACRA.init(this, config);
-        } catch (ACRAConfigurationException | IOException e) {
-            e.printStackTrace();
-        }
-
         ImageLoaderConfiguration localImageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this).imageDownloader(new BaseImageDownloader(this) {
             PreferencesUtility prefs = PreferencesUtility.getInstance(TimberApp.this);
 
             @Override
             protected InputStream getStreamFromNetwork(String imageUri, Object extra) throws IOException {
-                if (prefs.loadArtistImages()) return super.getStreamFromNetwork(imageUri, extra);
+                if (prefs.loadArtistAndAlbumImages())
+                    return super.getStreamFromNetwork(imageUri, extra);
                 throw new IOException();
             }
         }).build();

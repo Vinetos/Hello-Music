@@ -38,7 +38,7 @@ import fr.vinetos.hellomusic.R;
 
 public class SettingsActivity extends BaseThemedActivity implements ColorChooserDialog.ColorCallback, ATEActivityThemeCustomizer {
 
-    String action;
+    private String action;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

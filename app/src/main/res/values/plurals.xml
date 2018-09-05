@@ -32,7 +32,7 @@
     </plurals>
 
     <plurals name="NNNtracksdeleted">
-        <item quantity="one"><xliff:g example="1" id="songs_to_delete">%d</xliff:g> song was deleted.</item>
+        <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> song was deleted.</item>
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> songs were deleted.</item>
     </plurals>
 

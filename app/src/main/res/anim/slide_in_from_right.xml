@@ -17,7 +17,7 @@
     android:interpolator="@android:interpolator/fast_out_slow_in">
     <objectAnimator
         android:propertyName="x"
+        android:valueType="floatType"
         android:valueFrom="2000"
-        android:valueTo="0"
-        android:valueType="floatType" />
+        android:valueTo="0" />
 </set>

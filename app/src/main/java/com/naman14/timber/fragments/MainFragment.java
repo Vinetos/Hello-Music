@@ -41,8 +41,8 @@ import fr.vinetos.hellomusic.R;
 
 public class MainFragment extends Fragment {
 
-    PreferencesUtility mPreferences;
-    ViewPager viewPager;
+    private PreferencesUtility mPreferences;
+    private ViewPager viewPager;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

@@ -10,16 +10,20 @@ import java.net.URLEncoder;
  * Created by christoph on 17.07.16.
  */
 public class ScrobbleQuery {
-    public static final String Method = "track.scrobble";
     private static final String ARTIST_NAME = "artist";
     private static final String TRACK_NAME = "track";
     private static final String TIMESTAMP_NAME = "timestamp";
+
     @SerializedName(ARTIST_NAME)
     public String mArtist;
+
     @SerializedName(TRACK_NAME)
     public String mTrack;
+
     @SerializedName(TIMESTAMP_NAME)
     public long mTimestamp;
+
+    public static final String Method = "track.scrobble";
 
     public ScrobbleQuery(String in) {
         String[] arr = in.split(",");

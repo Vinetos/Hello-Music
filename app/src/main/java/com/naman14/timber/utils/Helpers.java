@@ -59,7 +59,7 @@ public class Helpers {
 
         String urltwitter = "https://twitter.com/Vinetos";
         String urlgithub = "https://github.com/Vinetos";
-        String urlsource = "https://github.com/Vinetos/Hello-Music-droid/issues";
+        String urlsource = "https://github.com/Vinetos/Hello-Music/issues";
 
         public AboutDialog() {
         }
@@ -71,13 +71,13 @@ public class Helpers {
                     Context.LAYOUT_INFLATER_SERVICE);
             LinearLayout aboutBodyView = (LinearLayout) layoutInflater.inflate(R.layout.layout_about_dialog, null);
 
-            TextView appversion = (TextView) aboutBodyView.findViewById(R.id.app_version_name);
+            TextView appversion = aboutBodyView.findViewById(R.id.app_version_name);
 
-            TextView twitter = (TextView) aboutBodyView.findViewById(R.id.twitter);
-            TextView github = (TextView) aboutBodyView.findViewById(R.id.github);
-            TextView source = (TextView) aboutBodyView.findViewById(R.id.source);
+            TextView twitter = aboutBodyView.findViewById(R.id.twitter);
+            TextView github = aboutBodyView.findViewById(R.id.github);
+            TextView source = aboutBodyView.findViewById(R.id.source);
 
-            TextView dismiss = (TextView) aboutBodyView.findViewById(R.id.dismiss_dialog);
+            TextView dismiss = aboutBodyView.findViewById(R.id.dismiss_dialog);
             dismiss.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -117,7 +117,7 @@ public class Helpers {
                 PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
                 String version = pInfo.versionName;
                 int versionCode = pInfo.versionCode;
-                appversion.setText("Timber " + version);
+                appversion.setText("HelloMusic " + version);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }

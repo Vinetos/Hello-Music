@@ -55,9 +55,9 @@ public class QuickControlsFragment extends Fragment implements MusicStateListene
 
 
     public static View topContainer;
-    int overflowcounter = 0;
     private ProgressBar mProgress;
     private SeekBar mSeekBar;
+    private int overflowcounter = 0;
     private PlayPauseButton mPlayPause, mPlayPauseExpanded;
     private TextView mTitle, mTitleExpanded;
     private TextView mArtist, mArtistExpanded;
@@ -66,6 +66,29 @@ public class QuickControlsFragment extends Fragment implements MusicStateListene
     private View playPauseWrapper, playPauseWrapperExpanded;
     private MaterialIconView previous, next;
     private boolean duetoplaypause = false;
+    private boolean fragmentPaused = false;
+
+    public Runnable mUpdateProgress = new Runnable() {
+
+        @Override
+        public void run() {
+
+            long position = MusicPlayer.position();
+            mProgress.setProgress((int) position);
+            mSeekBar.setProgress((int) position);
+
+            overflowcounter--;
+            if (MusicPlayer.isPlaying()) {
+                int delay = (int) (1500 - (position % 1000));
+                if (overflowcounter < 0 && !fragmentPaused) {
+                    overflowcounter++;
+                    mProgress.postDelayed(mUpdateProgress, delay);
+                }
+            } else mProgress.removeCallbacks(this);
+
+        }
+    };
+
     private final View.OnClickListener mPlayPauseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -87,6 +110,7 @@ public class QuickControlsFragment extends Fragment implements MusicStateListene
 
         }
     };
+
     private final View.OnClickListener mPlayPauseExpandedListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -105,27 +129,6 @@ public class QuickControlsFragment extends Fragment implements MusicStateListene
                     MusicPlayer.playOrPause();
                 }
             }, 200);
-
-        }
-    };
-    private boolean fragmentPaused = false;
-    public Runnable mUpdateProgress = new Runnable() {
-
-        @Override
-        public void run() {
-
-            long position = MusicPlayer.position();
-            mProgress.setProgress((int) position);
-            mSeekBar.setProgress((int) position);
-
-            overflowcounter--;
-            if (MusicPlayer.isPlaying()) {
-                int delay = (int) (1500 - (position % 1000));
-                if (overflowcounter < 0 && !fragmentPaused) {
-                    overflowcounter++;
-                    mProgress.postDelayed(mUpdateProgress, delay);
-                }
-            } else mProgress.removeCallbacks(this);
 
         }
     };

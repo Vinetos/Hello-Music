@@ -51,11 +51,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
     private static final String TOGGLE_SYSTEM_ANIMATIONS = "toggle_system_animations";
     private static final String KEY_START_PAGE = "start_page_preference";
-    Preference nowPlayingSelector, lastFMlogin, lockscreen, xposed;
-    SwitchPreference toggleAnimations;
-    ListPreference themePreference, startPagePreference;
-    PreferencesUtility mPreferences;
     private boolean lastFMlogedin;
+
+    private Preference nowPlayingSelector, lastFMlogin, lockscreen, xposed;
+
+    private SwitchPreference toggleAnimations;
+    private ListPreference themePreference, startPagePreference;
+    private PreferencesUtility mPreferences;
     private String mAteKey;
 
     @Override

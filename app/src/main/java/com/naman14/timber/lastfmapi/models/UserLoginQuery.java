@@ -7,13 +7,16 @@ import com.naman14.timber.lastfmapi.LastFmClient;
  * Created by christoph on 17.07.16.
  */
 public class UserLoginQuery {
-    public static final String Method = "auth.getMobileSession";
     private static final String USERNAME_NAME = "username";
     private static final String PASSWORD_NAME = "password";
+
     @SerializedName(USERNAME_NAME)
     public String mUsername;
+
     @SerializedName(PASSWORD_NAME)
     public String mPassword;
+
+    public static final String Method = "auth.getMobileSession";
 
     public UserLoginQuery(String username, String password) {
         this.mUsername = username;

@@ -37,14 +37,15 @@ import fr.vinetos.hellomusic.R;
  */
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHolder> {
 
-    int[] foregroundColors = {R.color.pink_transparent, R.color.green_transparent, R.color.blue_transparent, R.color.red_transparent, R.color.purple_transparent};
     private List<Playlist> arraylist;
     private Activity mContext;
     private boolean isGrid;
     private boolean showAuto;
     private int songCountInt;
+    private long totalRuntime;
     private long firstAlbumID = -1;
     private int foregroundColor;
+    int[] foregroundColors = {R.color.pink_transparent, R.color.green_transparent, R.color.blue_transparent, R.color.red_transparent, R.color.purple_transparent};
 
     public PlaylistAdapter(Activity context, List<Playlist> arraylist) {
         this.arraylist = arraylist;
@@ -126,7 +127,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
                         }
                     }
                 });
-        itemHolder.artist.setText(" " + String.valueOf(songCountInt) + " " + mContext.getString(R.string.songs));
+        itemHolder.artist.setText(" " + String.valueOf(songCountInt) + " " + mContext.getString(R.string.songs) + " - " + TimberUtils.makeShortTimeString(mContext, totalRuntime));
 
         if (TimberUtils.isLollipop())
             itemHolder.albumArt.setTransitionName("transition_album_art" + i);
@@ -141,6 +142,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
                     case 0:
                         List<Song> lastAddedSongs = LastAddedLoader.getLastAddedSongs(mContext);
                         songCountInt = lastAddedSongs.size();
+                        totalRuntime = 0;
+                        for (Song song : lastAddedSongs) {
+                            totalRuntime += song.duration / 1000; //for some reason default playlists have songs with durations 1000x larger than they should be
+                        }
 
                         if (songCountInt != 0) {
                             firstAlbumID = lastAddedSongs.get(0).albumId;
@@ -150,6 +155,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
                         TopTracksLoader recentloader = new TopTracksLoader(mContext, TopTracksLoader.QueryType.RecentSongs);
                         List<Song> recentsongs = SongLoader.getSongsForCursor(TopTracksLoader.getCursor());
                         songCountInt = recentsongs.size();
+                        totalRuntime = 0;
+                        for (Song song : recentsongs) {
+                            totalRuntime += song.duration / 1000; //for some reason default playlists have songs with durations 1000x larger than they should be
+                        }
 
                         if (songCountInt != 0) {
                             firstAlbumID = recentsongs.get(0).albumId;
@@ -159,6 +168,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
                         TopTracksLoader topTracksLoader = new TopTracksLoader(mContext, TopTracksLoader.QueryType.TopTracks);
                         List<Song> topsongs = SongLoader.getSongsForCursor(TopTracksLoader.getCursor());
                         songCountInt = topsongs.size();
+                        totalRuntime = 0;
+                        for (Song song : topsongs) {
+                            totalRuntime += song.duration / 1000; //for some reason default playlists have songs with durations 1000x larger than they should be
+                        }
 
                         if (songCountInt != 0) {
                             firstAlbumID = topsongs.get(0).albumId;
@@ -167,6 +180,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
                     default:
                         List<Song> playlistsongs = PlaylistSongLoader.getSongsInPlaylist(mContext, id);
                         songCountInt = playlistsongs.size();
+                        totalRuntime = 0;
+                        for (Song song : playlistsongs) {
+                            totalRuntime += song.duration;
+                        }
 
                         if (songCountInt != 0) {
                             firstAlbumID = playlistsongs.get(0).albumId;
@@ -177,6 +194,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
             } else {
                 List<Song> playlistsongs = PlaylistSongLoader.getSongsInPlaylist(mContext, id);
                 songCountInt = playlistsongs.size();
+                totalRuntime = 0;
+                for (Song song : playlistsongs) {
+                    totalRuntime += song.duration;
+                }
 
                 if (songCountInt != 0) {
                     firstAlbumID = playlistsongs.get(0).albumId;
@@ -196,21 +217,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
         this.arraylist.clear();
         this.arraylist.addAll(arraylist);
         notifyDataSetChanged();
-    }
-
-    private String getPlaylistType(int position) {
-        if (showAuto) {
-            switch (position) {
-                case 0:
-                    return Constants.NAVIGATE_PLAYLIST_LASTADDED;
-                case 1:
-                    return Constants.NAVIGATE_PLAYLIST_RECENT;
-                case 2:
-                    return Constants.NAVIGATE_PLAYLIST_TOPTRACKS;
-                default:
-                    return Constants.NAVIGATE_PLAYLIST_USERCREATED;
-            }
-        } else return Constants.NAVIGATE_PLAYLIST_USERCREATED;
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -233,6 +239,21 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ItemHo
 
         }
 
+    }
+
+    private String getPlaylistType(int position) {
+        if (showAuto) {
+            switch (position) {
+                case 0:
+                    return Constants.NAVIGATE_PLAYLIST_LASTADDED;
+                case 1:
+                    return Constants.NAVIGATE_PLAYLIST_RECENT;
+                case 2:
+                    return Constants.NAVIGATE_PLAYLIST_TOPTRACKS;
+                default:
+                    return Constants.NAVIGATE_PLAYLIST_USERCREATED;
+            }
+        } else return Constants.NAVIGATE_PLAYLIST_USERCREATED;
     }
 
 

@@ -3,8 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="160dp"
     android:layout_margin="2.0dip"
-    android:background="?attr/selectableItemBackground"
-    android:elevation="3dp">
+    android:elevation="3dp"
+    android:background="?attr/selectableItemBackground">
 
     <FrameLayout
         android:id="@+id/content"
